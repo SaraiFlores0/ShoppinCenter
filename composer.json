@@ -1,0 +1,21 @@
+{
+    "name": "shopping_center/proyecto",
+    "description": "Creando proyecto para ADD0",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Equipo3"
+        }
+    ],
+    "require": {
+        "intervention/image": "^2.5",
+        "phpmailer/phpmailer": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models"
+        }
+    }
+}
