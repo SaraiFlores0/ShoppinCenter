@@ -4,7 +4,6 @@ require_once __DIR__ . '/../includes/app.php';
 
 
 use MVC\Router;
-use Controllers\ProductoController;
 use Controllers\VendedorController;
 use Controllers\PaginasController;
 use Controllers\LoginController;
@@ -26,7 +25,7 @@ $router->post('/vendedores/actualizar', [VendedorController::class, 'actualizar'
 $router->post('/vendedores/eliminar', [VendedorController::class, 'eliminar']);
 
 
-// * Público */
+// * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
 $router->get('/nosotros', [PaginasController::class, 'nosotros']);
 $router->get('/productos', [PaginasController::class, 'productos']);
@@ -35,8 +34,11 @@ $router->get('/blog', [PaginasController::class, 'blog']);
 $router->get('/entrada', [PaginasController::class, 'entrada']);
 
 
-$router->get('/login', [LoginController::class, 'login']);
-$router->post('/login', [LoginController::class, 'login']);
+$router->get('/loginAdmin', [LoginController::class, 'loginAdmin']);
+$router->post('/loginAdmin', [LoginController::class, 'loginAdmin']);
+
+$router->get('/loginUsuario', [LoginController::class, 'loginUsuario']);
+$router->post('/loginUsuario', [LoginController::class, 'loginUsuario']);
 $router->get('/logout', [LoginController::class, 'logout']);
 
 

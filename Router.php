@@ -18,8 +18,8 @@ class Router
     public function comprobarRutas() {
 
         session_start();
-
-        $auth= $_SESSION['login'] ?? null ;
+ 
+        $auth= $_SESSION['loginUsuario'] ?? null ;
 
         $rutas_protegidas=['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar'];
 

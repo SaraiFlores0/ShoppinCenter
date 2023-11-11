@@ -1,24 +1,33 @@
 <?php
-    if(!isset($_SESSION)) {
+
+use Model\Usuario;
+    // Verificar si la sesión está iniciada
+    if (!isset($_SESSION)) {
         session_start();
     }
-    $auth = $_SESSION['login'] ?? false;
 
-    if(!isset($inicio)) {
-        $inicio = false;
-    } 
+    // Verificar si el usuario está autenticado
+    $auth = $_SESSION['loginUsuario'] ?? false;
+
+    $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+
+    // Inicializar la variable $inicio
+    $inicio = isset($inicio) ? $inicio : false;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienes Raices</title>
+    <title>Shopping Center</title>
     <link rel="stylesheet" href="../build/css/app.css">
 </head>
+
 <body>
-    
-    <header class="header <?php echo $inicio  ? 'inicio' : ''; ?>">
+
+    <header class="header efecto-oscuro <?php echo $inicio  ? 'inicio' : ''; ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/">
@@ -32,19 +41,24 @@
                 <div class="derecha">
                     <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
                     <nav class="navegacion">
+                        <a href="/loginUsuario">Iniciar Sesión</a>
                         <a href="/nosotros">Nosotros</a>
                         <a href="/propiedades">Anuncios</a>
                         <a href="/blog">Blog</a>
                         <a href="/contacto">Contacto</a>
-                        <?php if($auth): ?>
+                        <?php if ($auth) : ?>
                             <a href="/logout">Cerrar Sesión</a>
                         <?php endif; ?>
                     </nav>
                 </div>
-                
+
             </div> <!--.barra-->
 
-            <?php  echo $inicio ? "<h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1>" : ''; ?>
+            <?php if (!$auth) {
+                echo $inicio ? "<h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1><p>Bienvenido.</p>" : '';
+            } else {
+                echo $inicio ? "<h1>Bienvenido/a, $nombreUsuario</h1>" : '';
+            } ?>
         </div>
     </header>
 
@@ -67,4 +81,5 @@
 
     <script src="/build/js/bundle.min.js"></script>
 </body>
+
 </html>

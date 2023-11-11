@@ -26,20 +26,11 @@
 
 .iconos-caracteristicas {
     display: flex;
-    list-style: none;
     padding: 0;
-    max-width: 40rem;
+    gap:2rem;
 
-    li {
-        flex: 1;
-        display: flex;
-
-        img {
-            flex:  0 0 3rem;
-            margin-right: 1rem;
-        }
-        p {
-            font-weight: $black;
-        }
+    img{
+        width: 5rem;
+        height: 5rem;
     }
 }

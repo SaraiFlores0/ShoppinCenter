@@ -54,7 +54,6 @@ class ActiveRecord
     {
         $query = "CALL pa_vistaProductos();";
 
-
         $resultado = self::consultarSQL($query);
 
         return $resultado;
@@ -142,7 +141,6 @@ class ActiveRecord
         while ($registro = $resultado->fetch_assoc()) {
             $array[] = static::crearObjeto($registro);
         }
-
 
         // liberar la memoria
         $resultado->free();
