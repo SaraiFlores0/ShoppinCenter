@@ -1,15 +1,15 @@
 @include tablet {
-    .contenedor-anuncios {
+    .contenedor-products {
         @include grid(3, 2rem);
     }
 }
 
-.anuncio {
+.producto {
     background-color: lighten($gris, 5);
     border: 1px solid darken($gris, 10);
     margin-bottom: 2rem;
 
-    .contenido-anuncio {
+    .contenido-producto {
         padding: 2rem;
     }
 
@@ -24,7 +24,7 @@
     font-size: 3rem;
 }
 
-.iconos-caracteristicas {
+.iconos {
     display: flex;
     padding: 0;
     gap:2rem;

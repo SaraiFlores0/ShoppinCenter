@@ -19,9 +19,9 @@ class Router
 
         session_start();
  
-        $auth= $_SESSION['loginUsuario'] ?? null ;
+        $auth= $_SESSION['loginAdmin'] ?? null ;
 
-        $rutas_protegidas=['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar'];
+        $rutas_protegidas=['/admin', '/productos/crear', '/productos/actualizar', '/productos/eliminar'];
 
         $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
         $method = $_SERVER['REQUEST_METHOD'];
@@ -51,7 +51,7 @@ class Router
     public function render($view, $datos = []) {
         // Leer lo que le pasamos  a la vista
         foreach ($datos as $key => $value) {
-            $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla a otra no la reescribe, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
+            $$key = $value;  
         }
 
         ob_start(); // Almacenamiento en memoria durante un momento...

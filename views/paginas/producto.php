@@ -1,26 +1,27 @@
 <main class="contenedor seccion contenido-centrado">
-    <h1><?php echo $propiedad->titulo; ?></h1>
+    <h1><?php echo $producto->nombre; ?></h1>
 
     
-    <img loading="lazy" src="/imagenes/<?php echo $propiedad->imagen; ?>" alt="imagen de la propiedad">
+    <img loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="imagen del producto">
 
-    <div class="resumen-propiedad">
-        <p class="precio">$<?php echo $propiedad->precio; ?></p>
-        <ul class="iconos-caracteristicas">
-            <li>
-                <img class="icono" loading="lazy" src="build/img/icono_wc.svg" alt="icono wc">
-                <p><?php echo $propiedad->wc; ?></p>
-            </li>
-            <li>
-                <img class="icono" loading="lazy" src="build/img/icono_estacionamiento.svg" alt="icono estacionamiento">
-                <p><?php echo $propiedad->estacionamiento; ?></p>
-            </li>
-            <li>
-                <img class="icono"  loading="lazy" src="build/img/icono_dormitorio.svg" alt="icono habitaciones">
-                <p><?php echo $propiedad->habitaciones; ?></p>
-            </li>
-        </ul>
+    <div class="resumen-producto">
+                <p><?php echo $producto->descripcion; ?></p>
+                <p class="precio">$<?php echo $producto->precio; ?></p>
 
-        <?php echo $propiedad->descripcion; ?>
+                <p class="talla-marca">Marca: <?php echo $producto->marca; ?></p>
+
+                <p class="talla-marca">Talla: <?php echo $producto->talla; ?></p>
+
+                <div class="iconos-caracteristicas">
+                    <a href="#">
+                        <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono habitaciones">
+                     </a>  
+                    
+                    <a href="#">
+                        <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono habitaciones">
+                    </a>
+                
+                
+                </div>
     </div>
 </main>

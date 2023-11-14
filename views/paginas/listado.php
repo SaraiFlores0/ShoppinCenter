@@ -1,9 +1,9 @@
-<div class="contenedor-anuncios">
+<div class="contenedor-productos">
     <?php foreach ($productos as $producto) : ?>
-        <div class="anuncio">
-            <img loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="anuncio">
+        <div class="producto">
+            <img loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="producto">
 
-            <div class="contenido-anuncio">
+            <div class="contenido-producto">
                 <h3><?php echo $producto->nombre; ?></h3>
                 <p><?php echo $producto->descripcion; ?></p>
                 <p class="precio">$<?php echo $producto->precio; ?></p>
@@ -12,7 +12,7 @@
 
                 <p class="talla-marca">Talla: <?php echo $producto->talla; ?></p>
 
-                <div class="iconos-caracteristicas">
+                <div class="iconos">
                     <a href="#">
                         <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono habitaciones">
                      </a>  
@@ -27,7 +27,7 @@
                 <a href="producto?id=<?php echo $producto->id; ?>" class="boton-amarillo-block">
                     Ver Producto
                 </a>
-            </div><!--.contenido-anuncio-->
-        </div><!--anuncio-->
+            </div><!--.contenido-producto-->
+        </div><!--producto-->
     <?php endforeach; ?>
-</div> <!--.contenedor-anuncios-->
+</div> <!--.contenedor-productos-->

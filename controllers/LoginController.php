@@ -8,9 +8,10 @@ use Model\Usuario;
 
 class LoginController
 {
+    
+    //** Login del Admin */
     public static function loginAdmin(Router $router)
     {
-
         $errores = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,17 +22,10 @@ class LoginController
 
                 $resultado = $auth->existeUsuario();
 
-                if ($resultado === 0) {
-                    $errores = Admin::getErrores();
+                if (!$resultado) {
+                    $errores = Usuario::getErrores();
                 } else {
-
-                    $autenticado = $auth->comprobarPassword($resultado);
-
-                    if ($autenticado === 0) {
-                        $auth->autenticar();
-                    } else {
-                        $errores = Admin::getErrores();
-                    }
+                    $auth->autenticar();
                 }
             }
         }
@@ -41,9 +35,11 @@ class LoginController
         ]);
     }
 
+    //** --------------------------------------------------------- */
+
+    //** Login del usuario */
     public static function loginUsuario(Router $router)
     {
-
         $errores = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -67,11 +63,14 @@ class LoginController
         ]);
     }
 
+    //** --------------------------------------------------------- */
 
+    //** Logout */
     public static function logout()
     {
         session_start();
         $_SESSION = [];
         header('Location: /');
     }
+
 }

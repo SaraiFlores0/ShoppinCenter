@@ -7,8 +7,8 @@ use Model\Usuario;
     }
 
     // Verificar si el usuario está autenticado
-    $auth = $_SESSION['loginUsuario'] ?? false;
-
+    $auth = isset($_SESSION['loginUsuario']) || isset($_SESSION['loginAdmin']);
+   
     $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
 
     // Inicializar la variable $inicio
@@ -42,10 +42,10 @@ use Model\Usuario;
                     <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
                     <nav class="navegacion">
                         <a href="/loginUsuario">Iniciar Sesión</a>
-                        <a href="/nosotros">Nosotros</a>
-                        <a href="/propiedades">Anuncios</a>
-                        <a href="/blog">Blog</a>
-                        <a href="/contacto">Contacto</a>
+                        <a href="/">Premium Damas</a>
+                        <a href="/">Super Premium Damas</a>
+                        <a href="/">Premium Caballeros</a>
+                        <a href="/">Super Premium Caballeros</a>
                         <?php if ($auth) : ?>
                             <a href="/logout">Cerrar Sesión</a>
                         <?php endif; ?>
@@ -55,7 +55,7 @@ use Model\Usuario;
             </div> <!--.barra-->
 
             <?php if (!$auth) {
-                echo $inicio ? "<h1>Venta de Casas y Departamentos Exclusivos de Lujo</h1><p>Bienvenido.</p>" : '';
+                echo $inicio ? "<h1>Shopping Center</h1>" : '';
             } else {
                 echo $inicio ? "<h1>Bienvenido/a, $nombreUsuario</h1>" : '';
             } ?>
@@ -68,12 +68,13 @@ use Model\Usuario;
 
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
-            <nav class="navegacion">
-                <a href="nosotros.php">Nosotros</a>
-                <a href="anuncios.php">Anuncios</a>
-                <a href="blog.php">Blog</a>
-                <a href="contacto.php">Contacto</a>
-            </nav>
+        <nav class="navegacion">
+                        <a href="/loginUsuario">Iniciar Sesión</a>
+                        <a href="/">Premium Damas</a>
+                        <a href="/">Super Premium Damas</a>
+                        <a href="/">Premium Caballeros</a>
+                        <a href="/">Super Premium Caballeros</a>
+                    </nav>
         </div>
 
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>

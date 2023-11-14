@@ -36,20 +36,6 @@ class ActiveRecord
         return static::$errores;
     }
 
-    // Registros - CRUD
-    public function guardar()
-    {
-        $resultado = '';
-        if (!is_null($this->id)) {
-            // actualizar
-            $resultado = $this->actualizar();
-        } else {
-            // Creando un nuevo registro
-            $resultado = $this->crear();
-        }
-        return $resultado;
-    }
-
     public static function Allproductos()
     {
         $query = "CALL pa_vistaProductos();";
@@ -62,74 +48,56 @@ class ActiveRecord
     // Busca un registro por su id
     public static function find($id)
     {
-        $query = "SELECT * FROM " . static::$tabla  . " WHERE id = ${id}";
-
-        $resultado = self::consultarSQL($query);
-
-        return array_shift($resultado);
-    }
-
-    public static function get($limite)
-    {
-        $query = "SELECT * FROM " . static::$tabla . " LIMIT ${limite}";
+        $query = "CALL pa_Producto($id);";
 
         $resultado = self::consultarSQL($query);
 
         return $resultado;
+    }
+
+    public static function get($limite)
+    {
     }
 
     // crea un nuevo registro
     public function crear()
     {
-        // Sanitizar los datos
-        $atributos = $this->sanitizarAtributos();
+        $producto = new Producto();
+        // Usar sentencia preparada para el procedimiento almacenado
+        $query = "CALL pa_insertProductos(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @resultado)";
 
-        // Insertar en la base de datos
-        $query = " INSERT INTO " . static::$tabla . " ( ";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES (' ";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ') ";
-
-        // Resultado de la consulta
-        $resultado = self::$db->query($query);
-
-        return $resultado;
-    }
-
-    public function actualizar()
-    {
-
-        // Sanitizar los datos
-        $atributos = $this->sanitizarAtributos();
-
-        $valores = [];
-        foreach ($atributos as $key => $value) {
-            $valores[] = "{$key}='{$value}'";
+        // Preparar la consulta
+        $stmt = self::$db->prepare($query);
+        
+        // Verificar si la preparación fue exitosa
+        if ($stmt) {
+            // Vincular parámetros
+            $stmt->bind_param(
+                "sssssssssssss",
+                $producto->nombre,
+                $producto->precio,
+                $producto->marca,
+                $producto->talla,
+                $producto->estado,
+                $producto->categorias,
+                $producto->imagen,
+                $producto->descripcion,
+                $producto->proveedor,
+                $producto->entradas,
+                $producto->salidas,
+                $producto->devolucion,
+                $producto->fecha
+            );
+        
+            // Ejecutar la consulta preparada
+            $stmt->execute();
+            var_dump($stmt);
+    
+        } else {
+            // Manejar el error de preparación
+            self::$errores[] = 'Error en la BD: ' . self::$db->error;
+            return false;
         }
-
-        $query = "UPDATE " . static::$tabla . " SET ";
-        $query .=  join(', ', $valores);
-        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
-        $query .= " LIMIT 1 ";
-
-        $resultado = self::$db->query($query);
-
-        return $resultado;
-    }
-
-    // Eliminar un registro
-    public function eliminar()
-    {
-        // Eliminar el registro
-        $query = "DELETE FROM "  . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
-        $resultado = self::$db->query($query);
-
-        if ($resultado) {
-            $this->borrarImagen();
-        }
-
-        return $resultado;
     }
 
     public static function consultarSQL($query)
@@ -152,17 +120,6 @@ class ActiveRecord
     protected static function crearObjeto($registro)
     {
 
-        // $objeto = new static;
-
-        // foreach($registro as $key => $value ) {
-        //     if(property_exists( $objeto, $key  )) {
-        //         $objeto->$key = $value;
-
-        //     }
-        // }
-
-        // return $objeto;
-
         $producto = new Producto;
 
         $producto->id = $registro['Id'];
@@ -173,51 +130,25 @@ class ActiveRecord
         $producto->marca = $registro['MarcaProducto'];
         $producto->talla = $registro['TallaProducto'];
         $producto->estado = $registro['EstadoProducto'];
+        $producto->categorias = $registro['Categoria'];
+        $producto->proveedor = $registro['Proveedor'];
+        $producto->entradas = $registro['Entradas'];
+        $producto->salidas = $registro['Salidas'];
+        $producto->fecha = $registro['Fecha de Ingreso'];
+        $producto->devolucion = $registro['Devolucion'];
 
         return $producto;
-    }
-
-
-
-    // Identificar y unir los atributos de la BD
-    public function atributos()
-    {
-        $atributos = [];
-        foreach (static::$columnasDB as $columna) {
-            if ($columna === 'Id') continue;
-            $atributos[$columna] = $this->$columna;
-        }
-        return $atributos;
-    }
-
-    public function sanitizarAtributos()
-    {
-        $atributos = $this->atributos();
-        $sanitizado = [];
-        foreach ($atributos as $key => $value) {
-            $sanitizado[$key] = self::$db->escape_string($value);
-        }
-        return $sanitizado;
-    }
-
-    public function sincronizar($args = [])
-    {
-        foreach ($args as $key => $value) {
-            if (property_exists($this, $key) && !is_null($value)) {
-                $this->$key = $value;
-            }
-        }
     }
 
     // Subida de archivos
     public function setImagen($imagen)
     {
-        // Elimina la imagen previa
-        if (!is_null($this->id)) {
+
+        if( !is_null($this->id) ) {
             $this->borrarImagen();
         }
         // Asignar al atributo de imagen el nombre de la imagen
-        if ($imagen) {
+        if($imagen) {
             $this->imagen = $imagen;
         }
     }

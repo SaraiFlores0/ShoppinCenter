@@ -2,68 +2,79 @@
 
 namespace Model;
 
-class Admin extends ActiveRecord {
-   
-    // Base DE DATOS
-    protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'email', 'password'];
-
-    public $id;
-    public $email;
+class Admin extends ActiveRecord 
+{
+    
+    //** Propiedades */
+    public $usuario;
     public $password;
 
+    //** Constructor */ 
     public function __construct($args = [])
     {
-        $this->id = $args['id'] ?? null;
-        $this->email = $args['email'] ?? '';
-        $this->password = $args['password'] ?? '';
+        $this->usuario = $args['usuario'] ?? null;
+        $this->password = $args['password'] ?? null;
     }
 
-    public function validar() {
-        if(!$this->email) {
-            self::$errores[] = "El Email del usuario es obligatorio";
+    //** --------------------------------------------------------- */
+    
+    //** Validando los campos del formulario. */ 
+    public function validar()
+    {
+        if (!$this->usuario) {
+            self::$errores[] = "El Usuario es obligatorio";
         }
-        if(!$this->password) {
+        if (!$this->password) {
             self::$errores[] = "El Password del usuario es obligatorio";
         }
         return self::$errores;
     }
 
-    public function existeUsuario() {
-        // Revisar si el usuario existe.
-        $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
-        $resultado = self::$db->query($query);
+    //** --------------------------------------------------------- */
 
-        if(!$resultado->num_rows) {
-            self::$errores[] = 'El Usuario No Existe';
+    //** Verificando si el usuario exite. */
+    public function existeUsuario()
+    {
+        //** Revisar si el usuario existe.
+        $query = "SELECT fun_usuarioAdmin('$this->usuario', '$this->password') as usuarioExiste";
+        $resultado = self::$db->query($query);
+        
+        if ($resultado === false) {
+            self::$errores[] = 'Error al ejecutar la consulta.';
             return;
         }
 
+        $usuarioExiste = $resultado->fetch_assoc()['usuarioExiste'];
+
+        if ($usuarioExiste == 0) {
+            self::$errores[] = 'Usuario o contraseña incorrectos.';
+            return;
+        }
         return $resultado;
     }
+    
+    //** --------------------------------------------------------- */
 
-    public function comprobarPassword($resultado) {
-        $usuario = $resultado->fetch_object();
+    //** Autenticar al usuario. */
+    public function autenticar()
+    {
+        session_start();
 
-        $autenticado = strcmp( $this->password, $usuario->password );
+        //** Llenar el arreglo de la sesión */
+        $_SESSION['usuario'] = $this->usuario;
+        $_SESSION['loginAdmin'] = true;
 
-        if($autenticado!=0) {
-            self::$errores[] = 'El Password es Incorrecto';
-            return;
-        } 
+        //* Obtener el nombre del usuario y almacenarlo en la sesión */
+        $query = "SELECT fun_nombreAdmin('$this->usuario') as nombreUsuario;";
+        $resultado = self::$db->query($query);
 
-        return $autenticado;
-    }
+        if ($resultado !== false) {
+            $nombreUsuario = $resultado->fetch_assoc()['nombreUsuario'];
+            $_SESSION['nombreUsuario'] = $nombreUsuario;
+        }
 
-    public function autenticar() {
-         // El usuario esta autenticado
-         session_start();
-
-         // Llenar el arreglo de la sesión
-         $_SESSION['usuario'] = $this->email;
-         $_SESSION['loginAdmin'] = true;
-
-         header('Location: /admin');
+        //** Redirigir a la página admin.
+        header('Location: /admin');
     }
 
 }

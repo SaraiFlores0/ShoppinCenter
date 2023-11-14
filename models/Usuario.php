@@ -5,16 +5,20 @@ namespace Model;
 class Usuario extends ActiveRecord
 {
 
+    //** Propiedades */
     public $usuario;
     public $password;
 
-    // Constructor
+    //** Constructor */ 
     public function __construct($args = [])
     {
         $this->usuario = $args['usuario'] ?? null;
         $this->password = $args['password'] ?? null;
     }
+
+    //** --------------------------------------------------------- */
     
+    //** Validando los campos del formulario. */ 
     public function validar()
     {
         if (!$this->usuario) {
@@ -26,13 +30,15 @@ class Usuario extends ActiveRecord
         return self::$errores;
     }
 
+    //** --------------------------------------------------------- */
+
+    //** Verificando si el usuario exite. */
     public function existeUsuario()
     {
         //** Revisar si el usuario existe.
         $query = "SELECT fun_usuarioCliente('$this->usuario', '$this->password') as usuarioExiste;";
         $resultado = self::$db->query($query);
         
-
         if ($resultado === false) {
             self::$errores[] = 'Error al ejecutar la consulta.';
             return;
@@ -46,16 +52,19 @@ class Usuario extends ActiveRecord
         }
         return $resultado;
     }
+    
+    //** --------------------------------------------------------- */
 
+    //** Autenticar al usuario. */
     public function autenticar()
     {
         session_start();
 
-        //** Llenar el arreglo de la sesión
+        //** Llenar el arreglo de la sesión */
         $_SESSION['usuario'] = $this->usuario;
         $_SESSION['loginUsuario'] = true;
 
-        //* Obtener el nombre del usuario y almacenarlo en la sesión
+        //* Obtener el nombre del usuario y almacenarlo en la sesión */
         $query = "SELECT fun_nombreUsuario('$this->usuario') as nombreUsuario;";
         $resultado = self::$db->query($query);
 
@@ -67,4 +76,5 @@ class Usuario extends ActiveRecord
         //** Redirigir a la página principal.
         header('Location: /');
     }
+    
 }

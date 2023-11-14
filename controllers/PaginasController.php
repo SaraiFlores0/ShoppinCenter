@@ -17,12 +17,6 @@ class PaginasController {
         ]);
     }
 
-    public static function nosotros( Router $router ) {
-        $router->render('paginas/nosotros', [
-
-        ]);
-    }
-
     public static function productos( Router $router ) {
 
         $productos = Producto::Allproductos();
@@ -35,20 +29,11 @@ class PaginasController {
     public static function producto(Router $router) {
         $id = validarORedireccionar('/producto');
 
-        // Obtener los datos de la propiedad
+        // Obtener los datos del producto
         $producto = Producto::find($id);
 
-        $router->render('paginas/propiedad', [
-            'propiedad' => $producto
+        $router->render('paginas/producto', [
+            'producto' => $producto
         ]);
-    }
-
-    public static function blog( Router $router ) {
-
-        $router->render('paginas/blog');
-    }
-
-    public static function entrada( Router $router ) {
-        $router->render('paginas/entrada');
     }
 }

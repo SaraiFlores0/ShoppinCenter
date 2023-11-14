@@ -4,35 +4,25 @@ require_once __DIR__ . '/../includes/app.php';
 
 
 use MVC\Router;
-use Controllers\VendedorController;
 use Controllers\PaginasController;
+use Controllers\ProductoController;
 use Controllers\LoginController;
+
 
 $router = new Router();
 
-$router->get('/admin', [PropiedadController::class, 'index']);
-$router->get('/propiedades/crear', [PropiedadController::class, 'crear']);
-$router->post('/propiedades/crear', [PropiedadController::class, 'crear']);
-$router->get('/propiedades/actualizar', [PropiedadController::class, 'actualizar']);
-$router->post('/propiedades/actualizar', [PropiedadController::class, 'actualizar']);
-$router->post('/propiedades/eliminar', [PropiedadController::class, 'eliminar']);
-
-$router->get('/vendedores', [VendedorController::class, 'index']);
-$router->get('/vendedores/crear', [VendedorController::class, 'crear']);
-$router->post('/vendedores/crear', [VendedorController::class, 'crear']);
-$router->get('/vendedores/actualizar', [VendedorController::class, 'actualizar']);
-$router->post('/vendedores/actualizar', [VendedorController::class, 'actualizar']);
-$router->post('/vendedores/eliminar', [VendedorController::class, 'eliminar']);
+$router->get('/admin', [ProductoController::class, 'index']);
+$router->get('/productos/crear', [ProductoController::class, 'crear']);
+$router->post('/productos/crear', [ProductoController::class, 'crear']);
+$router->get('/productos/actualizar', [ProductoController::class, 'actualizar']);
+$router->post('/productos/actualizar', [ProductoController::class, 'actualizar']);
+$router->post('/productos/eliminar', [ProductoController::class, 'eliminar']);
 
 
 // * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
-$router->get('/nosotros', [PaginasController::class, 'nosotros']);
 $router->get('/productos', [PaginasController::class, 'productos']);
 $router->get('/producto', [PaginasController::class, 'producto']);
-$router->get('/blog', [PaginasController::class, 'blog']);
-$router->get('/entrada', [PaginasController::class, 'entrada']);
-
 
 $router->get('/loginAdmin', [LoginController::class, 'loginAdmin']);
 $router->post('/loginAdmin', [LoginController::class, 'loginAdmin']);

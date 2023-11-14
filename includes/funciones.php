@@ -29,7 +29,7 @@ function s($html): string
 //* Valida tipo de petición
 function validarTipoContenido($tipo)
 {
-    $tipos = ['vendedor', 'propiedad'];
+    $tipos = ['producto'];
     return in_array($tipo, $tipos);
 }
 
