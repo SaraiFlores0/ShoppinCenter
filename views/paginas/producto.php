@@ -12,13 +12,13 @@
 
                 <p class="talla-marca">Talla: <?php echo $producto->talla; ?></p>
 
-                <div class="iconos-caracteristicas">
+                <div class="iconos">
                     <a href="#">
-                        <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono habitaciones">
+                        <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono carrito">
                      </a>  
                     
                     <a href="#">
-                        <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono habitaciones">
+                        <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono fav">
                     </a>
                 
                 

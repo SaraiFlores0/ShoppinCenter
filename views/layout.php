@@ -21,7 +21,7 @@ use Model\Usuario;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Center</title>
+    <title></title>
     <link rel="stylesheet" href="../build/css/app.css">
 </head>
 
@@ -31,7 +31,7 @@ use Model\Usuario;
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/">
-                    <img src="../build/img/logo.svg" alt="Logotipo de Bienes Raices">
+                    <h1>Shopping Center</h1>
                 </a>
 
                 <div class="mobile-menu">
@@ -55,7 +55,7 @@ use Model\Usuario;
             </div> <!--.barra-->
 
             <?php if (!$auth) {
-                echo $inicio ? "<h1>Shopping Center</h1>" : '';
+                echo $inicio ? "" : '';
             } else {
                 echo $inicio ? "<h1>Bienvenido/a, $nombreUsuario</h1>" : '';
             } ?>
