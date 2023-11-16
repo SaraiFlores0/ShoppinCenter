@@ -12,5 +12,6 @@ return array(
     'MVC\\' => array($baseDir . '/'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Controllers\\' => array($baseDir . '/controllers'),
 );

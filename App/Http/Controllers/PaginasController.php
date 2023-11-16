@@ -1,38 +1,30 @@
 <?php
 
-namespace Controllers;
-use MVC\Router;
-use Model\Producto;
+namespace App\Http\Controllers;
 
+use App\Models\Producto;
+use App\Router;
 
 class PaginasController {
-    public static function index( Router $router ) {
-
+    public static function index(Router $router) {
         $productos = Producto::allProductos();
-       
-
-        $router->render('paginas/index', [
+        $router->dispatch('paginas/index', [
             'inicio' => true,
             'productos' => $productos
         ]);
     }
 
-    public static function productos( Router $router ) {
-
-        $productos = Producto::Allproductos();
-
-        $router->render('paginas/productos', [
+    public static function productos(Router $router) {
+        $productos = Producto::allProductos();
+        $router->dispatch('paginas/productos', [
             'productos' => $productos
         ]);
     }
 
     public static function producto(Router $router) {
         $id = validarORedireccionar('/producto');
-
-        // Obtener los datos del producto
         $producto = Producto::find($id);
-
-        $router->render('paginas/producto', [
+        $router->dispatch('paginas/producto', [
             'producto' => $producto
         ]);
     }
