@@ -82,5 +82,9 @@ use Model\Usuario;
 
     <script src="/build/js/bundle.min.js"></script>
 </body>
+<!-- <script>
+    // Desseleccionar cualquier opción por defecto al cargar la página
+    document.getElementById('producto[marca]').selectedIndex = -1;
+</script> -->
 
 </html>

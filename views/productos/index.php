@@ -27,7 +27,7 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
     <table class="productos">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>N°</th>
                 <th>Titulo</th>
                 <th>Imagen</th>
                 <th>Precio</th>
@@ -36,9 +36,10 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
         </thead>
 
         <tbody> <!-- Mostrar los Resultados -->
-            <?php foreach( $productos as $producto ): ?>
+            <?php $contador =1?>
+            <?php  foreach( $productos as $producto ): ?>
             <tr>
-                <td><?php echo $producto->id; ?></td>
+                <td><?php echo $contador; $contador++; ?></td>
                 <td><?php echo $producto->nombre; ?></td>
                 <td><img src="/imagenes/<?php echo $producto->imagen;?>" class="imagen-tabla"> </td>
                 <td>$ <?php echo $producto->precio; ?></td>

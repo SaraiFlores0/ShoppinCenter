@@ -13,6 +13,8 @@
     <!-- Marca del producto -->
     <label for="marca">Marca:<span class="asterisco">*</span></label>
     <select name="producto[marca]" id="marca">
+        
+      
         <option value="SHEIN">SHEIN</option>
         <option value="ZARA">ZARA</option>
         <option value="Forever 21">Forever 21</option>
@@ -82,11 +84,11 @@
 
 
     <label for="imagen">Imagen:<span class="asterisco">*</span></label>
-    <input type="file" id="imagen" accept="image/jpeg, image/png" name="producto[imagen]" enctype="multipart/form-data">
+    <input type="file" id="imagen" accept="image/jpeg, image/png" name="producto[imagen]">
     <?php  if (!empty($producto->imagen)) { ?>
         <img src="/imagenes/<?php echo htmlspecialchars($producto->imagen); ?>" class="imagen-small">
     <?php } ?>
-    <input type="hidden" name="producto[imagen_actual]" value="<?php echo htmlspecialchars($producto->imagen); ?>">
+    <input type="hidden" name="producto[imagen]" value="<?php echo htmlspecialchars($producto->imagen); ?>">
 
 
     <!-- Descripción del producto -->

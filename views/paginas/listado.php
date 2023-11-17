@@ -11,6 +11,7 @@
                 <p class="talla-marca">Marca: <?php echo $producto->marca; ?></p>
 
                 <p class="talla-marca">Talla: <?php echo $producto->talla; ?></p>
+                <p class="talla-marca"><?php echo $producto->estado; ?></p>
 
                 <div class="iconos">
                     <a href="#">

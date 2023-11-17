@@ -59,46 +59,33 @@ class ActiveRecord
     {
     }
 
-    // crea un nuevo registro
-    public function crear()
-    {
-        $producto = new Producto();
-        // Usar sentencia preparada para el procedimiento almacenado
-        $query = "CALL pa_insertProductos(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @resultado)";
-
-        // Preparar la consulta
-        $stmt = self::$db->prepare($query);
-        
-        // Verificar si la preparación fue exitosa
-        if ($stmt) {
-            // Vincular parámetros
-            $stmt->bind_param(
-                "sssssssssssss",
-                $producto->nombre,
-                $producto->precio,
-                $producto->marca,
-                $producto->talla,
-                $producto->estado,
-                $producto->categorias,
-                $producto->imagen,
-                $producto->descripcion,
-                $producto->proveedor,
-                $producto->entradas,
-                $producto->salidas,
-                $producto->devolucion,
-                $producto->fecha
-            );
-        
-            // Ejecutar la consulta preparada
-            $stmt->execute();
-            var_dump($stmt);
-    
-        } else {
-            // Manejar el error de preparación
-            self::$errores[] = 'Error en la BD: ' . self::$db->error;
-            return false;
-        }
-    }
+    // // crea un nuevo registro
+    // public function crear()
+    // {
+    //     $producto=new Producto();
+    //     $query = "CALL pa_insertProductos(
+    //         '$producto->nombre',
+    //         '$producto->precio',
+    //         '$producto->marca',
+    //         '$producto->talla',
+    //         '$producto->estado',
+    //         '$producto->categorias',
+    //         '$producto->imagen',
+    //         '$producto->descripcion',
+    //         '$producto->proveedor',
+    //         '$producto->entradas',
+    //         '$producto->salidas',
+    //         '$producto->devolucion',
+    //         '$producto->fecha',
+    //         @respuesta);";
+    //     echo $query; 
+    //     $resultado = self::$db->query($query);
+    //     // Obtén la salida del procedimiento almacenado
+    //     return $resultado;
+    //     $resultado = self::$db->query("SELECT @respuesta AS respuesta");
+    //     $respuesta = $resultado->fetch_assoc()['respuesta'];
+    //     echo $respuesta;
+    // }
 
     public static function consultarSQL($query)
     {
@@ -119,7 +106,6 @@ class ActiveRecord
 
     protected static function crearObjeto($registro)
     {
-
         $producto = new Producto;
 
         $producto->id = $registro['Id'];
