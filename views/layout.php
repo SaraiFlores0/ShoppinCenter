@@ -1,18 +1,17 @@
 <?php
 
-use Model\Usuario;
-    // Verificar si la sesión está iniciada
-    if (!isset($_SESSION)) {
-        session_start();
-    }
+// Verificar si la sesión está iniciada
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    // Verificar si el usuario está autenticado
-    $auth = isset($_SESSION['loginUsuario']) || isset($_SESSION['loginAdmin']);
-   
-    $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+// Verificar si el usuario está autenticado
+$auth = isset($_SESSION['loginUsuario']) || isset($_SESSION['loginAdmin']);
 
-    // Inicializar la variable $inicio
-    $inicio = isset($inicio) ? $inicio : false;
+$nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+
+// Inicializar la variable $inicio
+$inicio = isset($inicio) ? $inicio : false;
 
 ?>
 <!DOCTYPE html>
@@ -68,13 +67,13 @@ use Model\Usuario;
 
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
-        <nav class="navegacion">
-                        <a href="/loginUsuario">Iniciar Sesión</a>
-                        <a href="/">Premium Damas</a>
-                        <a href="/">Super Premium Damas</a>
-                        <a href="/">Premium Caballeros</a>
-                        <a href="/">Super Premium Caballeros</a>
-                    </nav>
+            <nav class="navegacion">
+                <a href="/loginUsuario">Iniciar Sesión</a>
+                <a href="/">Premium Damas</a>
+                <a href="/">Super Premium Damas</a>
+                <a href="/">Premium Caballeros</a>
+                <a href="/">Super Premium Caballeros</a>
+            </nav>
         </div>
 
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
@@ -82,9 +81,5 @@ use Model\Usuario;
 
     <script src="/build/js/bundle.min.js"></script>
 </body>
-<!-- <script>
-    // Desseleccionar cualquier opción por defecto al cargar la página
-    document.getElementById('producto[marca]').selectedIndex = -1;
-</script> -->
 
 </html>

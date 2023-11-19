@@ -16,7 +16,7 @@
                 <div class="iconos">
                     <a href="#">
                         <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono habitaciones">
-                     </a>  
+                    </a>  
                     
                     <a href="#">
                         <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono habitaciones">

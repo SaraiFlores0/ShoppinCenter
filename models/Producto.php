@@ -5,6 +5,7 @@ namespace Model;
 class Producto extends ActiveRecord
 {
 
+    //** Propiedades. */
     public $id;
     public $nombre;
     public $precio;
@@ -20,8 +21,8 @@ class Producto extends ActiveRecord
     public $devolucion;
     public $fecha;
 
-    //public $imagen_actual;
 
+    //** Constructor. */
     public function __construct($args = [])
     {
         $this->id = $args['Id'] ?? null;
@@ -40,9 +41,12 @@ class Producto extends ActiveRecord
         $this->devolucion = $args['devolucion'] ?? 0;
     }
 
+    //** --------------------------------------------------------- */
+
+    //** Validación. */
     public function validar()
     {
-        
+
         if (!$this->nombre) {
             self::$errores[] = "Debes añadir un nombre.";
         }
@@ -83,12 +87,12 @@ class Producto extends ActiveRecord
             self::$errores[] = 'La cantidad de salidas es obligatorio.';
         }
 
-        if($this->salidas>$this->entradas){
+        if ($this->salidas > $this->entradas) {
             self::$errores[] = 'La cantidad de salidas no puede ser mayor a la cantidad de entradas.';
         }
 
-        
-        if($this->devolucion>$this->entradas || $this->devolucion>$this->salidas && $this->devolucion!==$this->salidas){
+
+        if ($this->devolucion > $this->entradas || $this->devolucion > $this->salidas && $this->devolucion !== $this->salidas) {
             self::$errores[] = 'La cantidad de devoluciones no puede ser mayor a la cantidad de entradas ni de salidas.';
         }
 
@@ -98,16 +102,20 @@ class Producto extends ActiveRecord
         return self::$errores;
     }
 
+    //** --------------------------------------------------------- */
+
+
     public function validarImagen()
     {
-        // Validar imagen_actual solo si no hay una nueva imagen
+        //* Validar imagen.
         if (empty($this->imagen)) {
             self::$errores[] = 'La Imagen es Obligatoria';
         }
-
     }
 
-      // crea un nuevo registro
+    //** --------------------------------------------------------- */
+
+    //** Crear un producto con PA. */
     public function crear()
     {
         $query = "CALL pa_insertProductos(
@@ -125,21 +133,16 @@ class Producto extends ActiveRecord
         '$this->devolucion',
         '$this->fecha',
         @respuesta);";
-        $resultadoProductos = self::$db->query($query);
-        // Obtén la salida del procedimiento almacenado
-        return $resultadoProductos;
+        $resultado = self::$db->query($query);
 
         $resultado = self::$db->query("SELECT @respuesta AS respuesta");
-        $respuesta = $resultado->fetch_assoc()['respuesta'];
+        $resultado = $resultado->fetch_assoc()['respuesta'];
 
-        if($respuesta===0){
-        self::$errores[] = 'Error al crear el producto. ';
-        return self::$errores;
+        if ($resultado === 0) {
+            self::$errores[] = 'Error al crear el producto. ';
+            return self::$errores;
+        } else {
+            return $resultado;
         }
-        else{
-        return $respuesta;
-        }
-        
     }
-
 }

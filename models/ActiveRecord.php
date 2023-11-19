@@ -5,26 +5,23 @@ namespace Model;
 class ActiveRecord
 {
 
-    //**  */ Base DE DATOS
+    //** Base De Datos.  */
     protected static $db;
-    protected static $tabla = '';
-    protected static $columnasDB = [];
 
-    // Propiedades
+    //** Propiedades. */ 
     public $id;
     public $imagen;
 
-    // Errores
+    //** Errores. */ 
     protected static $errores = [];
 
-
-    // Definir la conexión a la BD
+    //** Definir la conexión a la BD */ 
     public static function setDB($database)
     {
         self::$db = $database;
     }
 
-    // Validación
+    //** Validación. */
     public static function getErrores()
     {
         return static::$errores;
@@ -36,6 +33,9 @@ class ActiveRecord
         return static::$errores;
     }
 
+    //** --------------------------------------------------------- */
+
+    //** Muestra todos los productos. */
     public static function Allproductos()
     {
         $query = "CALL pa_vistaProductos();";
@@ -45,7 +45,9 @@ class ActiveRecord
         return $resultado;
     }
 
-    // Busca un registro por su id
+    //** --------------------------------------------------------- */
+
+    //** Busca un producto por su id. */
     public static function find($id)
     {
         $query = "CALL pa_Producto($id);";
@@ -55,54 +57,32 @@ class ActiveRecord
         return $resultado;
     }
 
+    //** --------------------------------------------------------- */
+
     public static function get($limite)
     {
     }
 
-    // // crea un nuevo registro
-    // public function crear()
-    // {
-    //     $producto=new Producto();
-    //     $query = "CALL pa_insertProductos(
-    //         '$producto->nombre',
-    //         '$producto->precio',
-    //         '$producto->marca',
-    //         '$producto->talla',
-    //         '$producto->estado',
-    //         '$producto->categorias',
-    //         '$producto->imagen',
-    //         '$producto->descripcion',
-    //         '$producto->proveedor',
-    //         '$producto->entradas',
-    //         '$producto->salidas',
-    //         '$producto->devolucion',
-    //         '$producto->fecha',
-    //         @respuesta);";
-    //     echo $query; 
-    //     $resultado = self::$db->query($query);
-    //     // Obtén la salida del procedimiento almacenado
-    //     return $resultado;
-    //     $resultado = self::$db->query("SELECT @respuesta AS respuesta");
-    //     $respuesta = $resultado->fetch_assoc()['respuesta'];
-    //     echo $respuesta;
-    // }
+    //** --------------------------------------------------------- */
 
     public static function consultarSQL($query)
     {
-        // Consultar la base de datos
+        //* Consultar la base de datos
         $resultado = self::$db->query($query);
-        // Iterar los resultados
+        //* Iterar los resultados
         $array = [];
         while ($registro = $resultado->fetch_assoc()) {
             $array[] = static::crearObjeto($registro);
         }
 
-        // liberar la memoria
+        //* liberar la memoria
         $resultado->free();
 
-        // retornar los resultados
+        //* retornar los resultados
         return $array;
     }
+
+    //** --------------------------------------------------------- */
 
     protected static function crearObjeto($registro)
     {
@@ -126,20 +106,21 @@ class ActiveRecord
         return $producto;
     }
 
-    // Subida de archivos
+    //** --------------------------------------------------------- */
+
+    //** Subida de imagen. */ 
     public function setImagen($imagen)
     {
-
-        if( !is_null($this->id) ) {
+        if (!is_null($this->id)) {
             $this->borrarImagen();
         }
-        // Asignar al atributo de imagen el nombre de la imagen
-        if($imagen) {
+        //** Asignar al atributo de imagen el nombre de la imagen */ 
+        if ($imagen) {
             $this->imagen = $imagen;
         }
     }
 
-    // Elimina el archivo
+    //** Elimina la imagen. */ 
     public function borrarImagen()
     {
         // Comprobar si existe el archivo

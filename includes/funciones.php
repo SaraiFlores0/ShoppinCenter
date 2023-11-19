@@ -7,10 +7,10 @@ define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
 
 function incluirTemplate(string  $nombre, bool $inicio = false)
 {
-    include TEMPLATES_URL . "/${nombre}.php";
+    include TEMPLATES_URL . "/$nombre.php";
 }
 
-//* Permite visualizar una variable usando var_dump.
+//** Permite visualizar una variable usando var_dump. */
 function debuguear($variable)
 {
     echo "<pre>";
@@ -19,28 +19,28 @@ function debuguear($variable)
     exit;
 }
 
-//* Escapa / Sanitizar el HTML
+//** Escapa / Sanitizar el HTML. */
 function s($html): string
 {
     $s = htmlspecialchars($html);
     return $s;
 }
 
-//* Valida tipo de petición
+//** Valida tipo de petición. */
 function validarTipoContenido($tipo)
 {
     $tipos = ['producto'];
     return in_array($tipo, $tipos);
 }
 
-//* Muestra los mensajes
+//**  Muestra los mensajes de éxito. */
 function mostrarNotificacion($codigo)
 {
     $mensaje = '';
 
     switch ($codigo) {
         case 1:
-            $mensaje = 'Creada Correctamente';
+            $mensaje = 'Producto Creado Correctamente.';
             break;
         case 2:
             $mensaje = 'Actualizada Correctamente';
@@ -55,13 +55,14 @@ function mostrarNotificacion($codigo)
     return $mensaje;
 }
 
+
 function validarORedireccionar(string $url)
 {
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if (!$id) {
-        header("Location: ${url} ");
+        header("Location: $url");
     }
 
     return $id;
