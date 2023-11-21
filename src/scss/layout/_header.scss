@@ -14,12 +14,12 @@
         background-size: cover;
 
         @include tablet {
-            min-height: 70rem;
+            min-height: unset;
         }
 
         .contenido-header {
             @include tablet {
-                min-height: 70rem;
+                min-height: unset;
             }
         }
     }
@@ -31,10 +31,10 @@
     justify-content: space-between;
 
     h1 {
-        text-align: left;
+        text-align: center;
         color: $blanco;
         font-weight: $bold;
-        line-height: 2;
-        max-width: 60rem;
+        line-height: 20px;
+        max-width: 100%;
     }
 }

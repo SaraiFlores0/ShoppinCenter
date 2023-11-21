@@ -30,16 +30,22 @@ use Model\Usuario;
     <header class="header efecto-oscuro <?php echo $inicio  ? 'inicio' : ''; ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="/">
+                <a href="/" class="logo">
                     <h1>Shopping Center</h1>
                 </a>
+                <br>
 
                 <div class="mobile-menu">
                     <img src="../build/img/barras.svg" alt="icono menu responsive">
                 </div>
 
                 <div class="derecha">
+                    <div >
                     <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
+                    <img class="dark-mode-boton" src="/build/img/carrito.svg">
+                    
+                    </div>
+                    
                     <nav class="navegacion">
                         <a href="/loginUsuario">Iniciar Sesión</a>
                         <a href="/">Premium Damas</a>

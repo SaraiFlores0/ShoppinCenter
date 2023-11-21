@@ -4,10 +4,13 @@
     align-items: center;
 
     @include tablet {
-        align-items: flex-end;
+     
     }
 
     .dark-mode-boton {
+        display: inline;
+        margin-left: 10px;
+        margin-right: 10px;
         width: 3rem;
         margin-top: 3rem;
         margin-bottom: 2rem;
@@ -22,12 +25,18 @@
         }
     }
 }
-
+.logo
+{
+    width: 100%;
+    text-align: center;
+}
 .barra {
-    display: flex;
+    
+    display: block;
     flex-direction: column;
     align-items: center;
-    padding-top: 3rem;
+    padding-top: 20px;
+    text-align: center;
     @include tablet {
         flex-direction: row;
         justify-content: space-between;

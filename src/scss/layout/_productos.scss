@@ -3,20 +3,41 @@
         @include grid(3, 2rem);
     }
 }
-
+.productimg{
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 10px;
+    min-height: 100px;
+    
+}
+.imgcont{
+    padding: 20px;
+}
 .producto {
+    border-radius: 18px;
     background-color: lighten($gris, 5);
-    border: 1px solid darken($gris, 10);
+    background-color: white !important;
+    border: 1px solid darken($gris, .1);
+    box-shadow: 0px 10px 20px rgba(182, 182, 182, 0.356);
     margin-bottom: 2rem;
+    transition: .3s;
 
     .contenido-producto {
-        padding: 2rem;
+        padding: 3rem;
     }
 
     h3, p {
+        font-weight: 500;
         margin: 0;
+        text-align: left;
+    }
+    h3{
+        line-height: 1.2em;   
+        padding-bottom: 10px;
     }
  
+}
+.producto:hover{
+    transform: scale(1.03);
 }
 .precio {
     color: $verde;
@@ -30,6 +51,7 @@
     gap:2rem;
 
     img{
+       
         width: 5rem;
         height: 5rem;
     }

@@ -4,6 +4,9 @@
 
 .boton-amarillo-block {
     @include boton($amarillo, block);
+    border-radius: 12px;
+    box-shadow: 0px 10px 20px rgba(201, 128, 34, 0.356);
+    transition: .4s;
 }
 
 .boton-verde {
