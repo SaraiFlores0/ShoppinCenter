@@ -8,10 +8,6 @@ class ActiveRecord
     //** Base De Datos.  */
     protected static $db;
 
-    //** Propiedades. */ 
-    public $id;
-    public $imagen;
-
     //** Errores. */ 
     protected static $errores = [];
 
@@ -54,13 +50,11 @@ class ActiveRecord
 
         $resultado = self::consultarSQL($query);
 
-        return $resultado;
-    }
-
-    //** --------------------------------------------------------- */
-
-    public static function get($limite)
-    {
+        if ($resultado && count($resultado) > 0) {
+            return $resultado[0]; //* Devuelve el primer elemento del array
+        } else {
+            return null;
+        }
     }
 
     //** --------------------------------------------------------- */
@@ -111,22 +105,38 @@ class ActiveRecord
     //** Subida de imagen. */ 
     public function setImagen($imagen)
     {
-        if (!is_null($this->id)) {
+        $producto = new Producto;
+        if (!is_null($producto->imagen)) {
             $this->borrarImagen();
         }
         //** Asignar al atributo de imagen el nombre de la imagen */ 
         if ($imagen) {
-            $this->imagen = $imagen;
+            $producto->imagen = $imagen;
         }
     }
 
     //** Elimina la imagen. */ 
     public function borrarImagen()
     {
+        $producto = new Producto;
         // Comprobar si existe el archivo
-        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-        if ($existeArchivo) {
-            unlink(CARPETA_IMAGENES . $this->imagen);
+        $rutaImagen = CARPETA_IMAGENES . $producto->imagen;
+        if (is_file($rutaImagen)) {
+            if (unlink($rutaImagen)) {
+                echo 'Archivo de imagen eliminado correctamente';
+            } else {
+                echo 'Error al eliminar el archivo de imagen';
+            }
+        }
+    }
+
+
+    public function sincronizar($args = [])
+    {
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
         }
     }
 }

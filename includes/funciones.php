@@ -43,7 +43,7 @@ function mostrarNotificacion($codigo)
             $mensaje = 'Producto Creado Correctamente.';
             break;
         case 2:
-            $mensaje = 'Actualizada Correctamente';
+            $mensaje = 'Producto Actualizado Correctamente.';
             break;
         case 3:
             $mensaje = 'Eliminada Correctamente';

@@ -16,12 +16,18 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
     } ?>
     <h1>Administrador/a de Shopping Center</h1>
 
-
+    <?php
+    $mensaje = mostrarNotificacion(intval($resultado));
+    if ($mensaje) { ?>
+        <p id='mensaje-exito' class="alerta exito"><?php echo s($mensaje); ?></p>
+    <?php }
+    ?>
 
 
     <?php include __DIR__ . '/../navegacion.php'; ?>
 
     <h2>Productos</h2>
+    
     <table class="productos">
         <thead>
             <tr>
@@ -43,13 +49,13 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
                     <td><img src="/imagenes/<?php echo $producto->imagen; ?>" class="imagen-tabla"> </td>
                     <td>$ <?php echo $producto->precio; ?></td>
                     <td>
-                        <form method="POST" action="productos/eliminar" class="w-100">
-                            <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
-                            <input type="hidden" name="tipo" value="producto">
-                            <input type="submit" class="boton-rojo-block" value="Eliminar">
-                        </form>
+                    <form method="POST" action="productos/eliminar" class="w-100">
+                        <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
+                        <input type="hidden" name="tipo" value="producto">
+                        <input type="submit" class="boton-rojo-block" value="Eliminar">
+                    </form>
 
-                        <a href="producto/actualizar?id=<?php echo $producto->id; ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="productos/actualizar?id=<?php echo $producto->id; ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

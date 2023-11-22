@@ -97,13 +97,7 @@ class ProductoController
                             mensajeExito.style.display = 'none'; // Oculta el mensaje
                         }
                         window.location.href = '/admin'; // Redirige a /admin
-                    }, 1000);
-        
-                    // Limpia los valores de los campos después de 3 segundos
-                    setTimeout(function() {
-                        var form = document.getElementById('tuFormulario'); // Reemplaza 'tuFormulario' con el ID de tu formulario
-                        form.reset(); // Restablece los valores del formulario
-                    }, 3000); // 3000 milisegundos = 3 segundos
+                    }, 1500);
                     </script>";
                 }
             }
@@ -115,5 +109,95 @@ class ProductoController
             'producto' => $producto,
             'resultado' => $resultado
         ]);
+    }
+
+    //** --------------------------------------------------------- */
+
+    //** Actualiza la información del producto. */
+    public static function actualizar(Router $router)
+    {
+        $id = validarORedireccionar('/admin');
+        $errores = Producto::getErrores();
+        $producto = Producto::find($id);
+        $resultado = '';
+
+        //** Ejecutar el código después de que el usuario envía el formulario.*/ 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $args = $_POST['producto'];
+            $argsProducto = (array)$producto;
+            $producto->sincronizar($args + $argsProducto);
+
+            //** Generar un nombre único a la imagen. */
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+            //** Realizar resize a la imagen con Intervention */
+            if ($_FILES['producto']['tmp_name']['imagen']) {
+                $image = Image::make($_FILES['producto']['tmp_name']['imagen'])->fit(800, 600);
+                $producto->setImagen($nombreImagen);
+            }
+
+            //** Validar los campos. */
+            $errores = $producto->validar();
+
+            //** Si no hay errores, actualizar producto. */
+            if (empty($errores)) {
+                if ($_FILES['producto']['tmp_name']['imagen']) {
+                    $image->save(CARPETA_IMAGENES . $nombreImagen);
+                }
+
+                //* Actualiza en la base de datos.
+                $resultado = $producto->actualizar();
+
+                if ($resultado === 0) {
+                    $errores[] = 'Error al actualizar el producto. ';
+                } else {
+                    //** Mostrar mensaje de éxito y redirigir al admin. */
+                    mostrarNotificacion($resultado);
+                    echo "<script>
+                    setTimeout(function() {
+                        var mensajeExito = document.getElementById('mensaje-exito');
+                        if (mensajeExito) {
+                            mensajeExito.style.display = 'none'; // Oculta el mensaje
+                        }
+                        window.location.href = '/admin'; // Redirige a /admin
+                    }, 1500);
+                    </script>";
+                }
+            }
+        }
+
+        $router->render('productos/actualizar', [
+            'errores' => $errores,
+            'producto' => $producto,
+            'resultado' => $resultado
+        ]);
+    }
+
+    //** --------------------------------------------------------- */
+
+    //** Elimina la información del producto. */
+    public static function eliminar()
+    {
+
+        //** Ejecutar el código después del POST.*/ 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $tipo = $_POST['tipo'];
+
+            //** Peticiones validas
+            if (validarTipoContenido($tipo)) {
+                //** Leer el id
+                $id = $_POST['id'];
+                $id = filter_var($id, FILTER_VALIDATE_INT);
+
+                //** Encontrar y eliminar la propiedad
+                $producto = Producto::find($id);
+                $resultado = $producto->eliminar();
+
+                //** Redireccionar
+                if ($resultado) {
+                    header('location: /productos');
+                }
+            }
+        }
     }
 }

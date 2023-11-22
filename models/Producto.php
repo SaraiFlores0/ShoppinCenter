@@ -118,7 +118,7 @@ class Producto extends ActiveRecord
     //** Crear un producto con PA. */
     public function crear()
     {
-        $query = "CALL pa_insertProductos(
+        $query = "CALL pa_insertProducto(
         '$this->nombre',
         '$this->precio',
         '$this->marca',
@@ -140,6 +140,73 @@ class Producto extends ActiveRecord
 
         if ($resultado === 0) {
             self::$errores[] = 'Error al crear el producto. ';
+            return self::$errores;
+        } else {
+            return $resultado;
+        }
+    }
+
+    //** --------------------------------------------------------- */
+
+    //** Actualiza un producto con PA. */
+    public function actualizar()
+    {
+        $query = "CALL pa_updateProducto(
+        '$this->id',
+        '$this->nombre',
+        '$this->precio',
+        '$this->marca',
+        '$this->talla',
+        '$this->estado',
+        '$this->categorias',
+        '$this->imagen',
+        '$this->descripcion',
+        '$this->proveedor',
+        '$this->entradas',
+        '$this->salidas',
+        '$this->devolucion',
+        '$this->fecha',
+        @respuesta);";
+        // Liberar los resultados para evitar el error "Commands out of sync"
+        while (self::$db->more_results()) {
+            self::$db->next_result();
+            if ($result = self::$db->store_result()) {
+                $result->free();
+            }
+        }
+
+        $resultado = self::$db->query($query);
+
+        $resultado = self::$db->query("SELECT @respuesta AS respuesta");
+        $resultado = $resultado->fetch_assoc()['respuesta'];
+
+        if ($resultado === 0) {
+            self::$errores[] = 'Error al actualizar el producto. ';
+            return self::$errores;
+        } else {
+            return 2;
+        }
+    }
+
+    //** --------------------------------------------------------- */
+
+    //** Elimina un producto con una función. */
+    public function eliminar()
+    {
+        $query = "SELECT fun_borrarProducto('$this->id');";
+
+        //** Liberar los resultados para evitar el error "Commands out of sync".
+        while (self::$db->more_results()) {
+            self::$db->next_result();
+            if ($result = self::$db->store_result()) {
+                $result->free();
+            }
+        }
+
+        $resultado = self::$db->query($query);
+
+        if ($resultado === 0) {
+            self::$errores[] = 'Error al eliminar el producto. ';
             return self::$errores;
         } else {
             return $resultado;
