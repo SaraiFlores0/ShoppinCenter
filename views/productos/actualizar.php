@@ -1,7 +1,14 @@
 <main class="contenedor seccion">
     <h1>Actualizar Producto </h1>
 
-    <a href="/productos" class="boton boton-verde">Volver</a>
+    <?php
+    $mensaje = mostrarNotificacion(intval($resultado));
+    if ($mensaje) { ?>
+        <p id='mensaje-exito' class="alerta exito"><?php echo s($mensaje); ?></p>
+    <?php }
+    ?>
+
+    <a href="/admin" class="boton boton-verde">Volver</a>
 
     <?php foreach($errores as $error): ?>
     <div class="alerta error">

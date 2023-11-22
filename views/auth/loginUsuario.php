@@ -11,7 +11,7 @@
         <fieldset>
             <legend>Email y Password</legend>
 
-            <label for="email">E-mail</label>
+            <label for="usuario">E-mail</label>
             <input type="text" name="usuario" placeholder="Tu Usuario" id="usuario">
 
             <label for="password">Password</label>

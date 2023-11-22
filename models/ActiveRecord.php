@@ -5,26 +5,19 @@ namespace Model;
 class ActiveRecord
 {
 
-    //**  */ Base DE DATOS
+    //** Base De Datos.  */
     protected static $db;
-    protected static $tabla = '';
-    protected static $columnasDB = [];
 
-    // Propiedades
-    public $id;
-    public $imagen;
-
-    // Errores
+    //** Errores. */ 
     protected static $errores = [];
 
-
-    // Definir la conexión a la BD
+    //** Definir la conexión a la BD */ 
     public static function setDB($database)
     {
         self::$db = $database;
     }
 
-    // Validación
+    //** Validación. */
     public static function getErrores()
     {
         return static::$errores;
@@ -36,6 +29,9 @@ class ActiveRecord
         return static::$errores;
     }
 
+    //** --------------------------------------------------------- */
+
+    //** Muestra todos los productos. */
     public static function Allproductos()
     {
         $query = "CALL pa_vistaProductos();";
@@ -45,81 +41,45 @@ class ActiveRecord
         return $resultado;
     }
 
-    // Busca un registro por su id
+    //** --------------------------------------------------------- */
+
+    //** Busca un producto por su id. */
     public static function find($id)
     {
         $query = "CALL pa_Producto($id);";
 
         $resultado = self::consultarSQL($query);
 
-        return $resultado;
-    }
-
-    public static function get($limite)
-    {
-    }
-
-    // crea un nuevo registro
-    public function crear()
-    {
-        $producto = new Producto();
-        // Usar sentencia preparada para el procedimiento almacenado
-        $query = "CALL pa_insertProductos(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, @resultado)";
-
-        // Preparar la consulta
-        $stmt = self::$db->prepare($query);
-        
-        // Verificar si la preparación fue exitosa
-        if ($stmt) {
-            // Vincular parámetros
-            $stmt->bind_param(
-                "sssssssssssss",
-                $producto->nombre,
-                $producto->precio,
-                $producto->marca,
-                $producto->talla,
-                $producto->estado,
-                $producto->categorias,
-                $producto->imagen,
-                $producto->descripcion,
-                $producto->proveedor,
-                $producto->entradas,
-                $producto->salidas,
-                $producto->devolucion,
-                $producto->fecha
-            );
-        
-            // Ejecutar la consulta preparada
-            $stmt->execute();
-            var_dump($stmt);
-    
+        if ($resultado && count($resultado) > 0) {
+            return $resultado[0]; //* Devuelve el primer elemento del array
         } else {
-            // Manejar el error de preparación
-            self::$errores[] = 'Error en la BD: ' . self::$db->error;
-            return false;
+            return null;
         }
     }
 
+    //** --------------------------------------------------------- */
+
     public static function consultarSQL($query)
     {
-        // Consultar la base de datos
+        //* Consultar la base de datos
         $resultado = self::$db->query($query);
-        // Iterar los resultados
+        //* Iterar los resultados
         $array = [];
         while ($registro = $resultado->fetch_assoc()) {
             $array[] = static::crearObjeto($registro);
         }
 
-        // liberar la memoria
+        //* liberar la memoria
         $resultado->free();
 
-        // retornar los resultados
+        //* retornar los resultados
         return $array;
     }
 
+    //** --------------------------------------------------------- */
+
     protected static function crearObjeto($registro)
     {
-
         $producto = new Producto;
 
         $producto->id = $registro['Id'];
@@ -140,26 +100,43 @@ class ActiveRecord
         return $producto;
     }
 
-    // Subida de archivos
+    //** --------------------------------------------------------- */
+
+    //** Subida de imagen. */ 
     public function setImagen($imagen)
     {
-
-        if( !is_null($this->id) ) {
+        $producto = new Producto;
+        if (!is_null($producto->imagen)) {
             $this->borrarImagen();
         }
-        // Asignar al atributo de imagen el nombre de la imagen
-        if($imagen) {
-            $this->imagen = $imagen;
+        //** Asignar al atributo de imagen el nombre de la imagen */ 
+        if ($imagen) {
+            $producto->imagen = $imagen;
         }
     }
 
-    // Elimina el archivo
+    //** Elimina la imagen. */ 
     public function borrarImagen()
     {
+        $producto = new Producto;
         // Comprobar si existe el archivo
-        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-        if ($existeArchivo) {
-            unlink(CARPETA_IMAGENES . $this->imagen);
+        $rutaImagen = CARPETA_IMAGENES . $producto->imagen;
+        if (is_file($rutaImagen)) {
+            if (unlink($rutaImagen)) {
+                echo 'Archivo de imagen eliminado correctamente';
+            } else {
+                echo 'Error al eliminar el archivo de imagen';
+            }
+        }
+    }
+
+
+    public function sincronizar($args = [])
+    {
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
         }
     }
 }
