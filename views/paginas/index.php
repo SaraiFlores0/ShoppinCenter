@@ -1,27 +1,29 @@
+<img src="build/img/ban1.jpg" alt="">
 <main class="contenedor seccion">
+    
     <h1>Más Sobre Nosotros</h1>
 
     <div class="iconos-nosotros">
         <div class="icono">
             <img src="build/img/icono1.svg" alt="Icono seguridad" loading="lazy">
             <h3>Seguridad</h3>
-            <p>Possimus, suscipit repudiandae. Autem deserunt aliquid deleniti sit minus consectetur obcaecati molestiae dolorem natus dolores reiciendis tempore, explicabo cum nobis laudantium. Voluptates?</p>
+            <p>La mejor seguridad en tu proceso de compra web!</p>
         </div>
         <div class="icono">
             <img src="build/img/icono2.svg" alt="Icono Precio" loading="lazy">
             <h3>Precio</h3>
-            <p>Possimus, suscipit repudiandae. Autem deserunt aliquid deleniti sit minus consectetur obcaecati molestiae dolorem natus dolores reiciendis tempore, explicabo cum nobis laudantium. Voluptates?</p>
+            <p>Los mejores precios, la mejor Ropa.</p>
         </div>
         <div class="icono">
             <img src="build/img/icono3.svg" alt="Icono Tiempo" loading="lazy">
             <h3>A Tiempo</h3>
-            <p>Possimus, suscipit repudiandae. Autem deserunt aliquid deleniti sit minus consectetur obcaecati molestiae dolorem natus dolores reiciendis tempore, explicabo cum nobis laudantium. Voluptates?</p>
+            <p>Entregas a domicilio en tiempo record!</p>
         </div>
     </div>
 </main>
 
 <section class="seccion contenedor">
-    <h2>Productos en venta</h2>
+    <h2><strong>Productos en venta</strong></h2>
 
     <?php 
         include 'listado.php';

@@ -1,8 +1,9 @@
 <div class="contenedor-productos">
     <?php foreach ($productos as $producto) : ?>
         <div class="producto">
-            <img loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="producto">
-
+            <div class="imgcont">
+            <img class="productimg" loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="producto">
+            </div>
             <div class="contenido-producto">
                 <h3><?php echo $producto->nombre; ?></h3>
                 <p><?php echo $producto->descripcion; ?></p>
