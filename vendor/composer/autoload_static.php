@@ -30,6 +30,10 @@ class ComposerStaticInit49cec7ba907ffc7b5e49ecde0ead2858
         array (
             'GuzzleHttp\\Psr7\\' => 16,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'C' => 
         array (
             'Controllers\\' => 12,
@@ -60,6 +64,10 @@ class ComposerStaticInit49cec7ba907ffc7b5e49ecde0ead2858
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Controllers\\' => 
         array (
