@@ -126,11 +126,13 @@ class CarritoController
  
          if (empty($errores)) {
              $totalCarrito = $carrito->obtenerTotalCarrito($Usuario);
+             $carritoProductos=$carrito->obtenerProductodeCarrito($Usuario);
          }
  
          //** Mostrar a la vista. */    
          $router->render('carrito/checkout', [
-             'carrito' => $totalCarrito,
+             'totalCarrito' => $totalCarrito,
+             'carrito' => $carritoProductos,
              'errores' => $errores
          ]);
      }

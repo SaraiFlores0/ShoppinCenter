@@ -20,7 +20,7 @@ $router->post('/productos/actualizar', [ProductoController::class, 'actualizar']
 $router->post('/productos/eliminar', [ProductoController::class, 'eliminar']);
 $router->post('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCarrito']);
 $router->get('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCarrito']);
-$router->get('/carrito/cantidad', [CarritoController::class, 'obtenerCantidadEnCarrito']);
+$router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']);
 $router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']);
 
 //CHECKOUT VISTA

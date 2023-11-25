@@ -105,4 +105,20 @@ class Carrito extends ActiveRecord
 
         return $resultado;
     }
+
+    //** Agrega el producto al carrito */
+    public function obtenerProductodeCarrito($usuario)
+    {
+        $query = "SELECT * FROM vistaCarrrito WHERE UsuarioCarrito=(SELECT u.ID_Usuario FROM usuarios u WHERE u.Usuario='$usuario');";
+
+        while (self::$db->more_results()) {
+            self::$db->next_result();
+            if ($result = self::$db->store_result()) {
+                $result->free();
+            }
+        }
+        $resultado = self::$db->query($query);
+
+        return $resultado;
+    }
 }

@@ -13,7 +13,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
 <main class="contenedor seccion">
     <h2>Carrito de Compras</h2>
     <a href="/" class="boton boton-naranja">Volver</a>
-    <a href="/carrito/comprar" class="boton boton-naranja">Comprar</a>
+    <a href="/carrito/comprar" class="boton boton-naranja" >Comprar</a>
 
     <?php if (!isset($_SESSION['usuario'])) { ?>
         <div id='mensaje-advertencia' class="alerta advertencia">
