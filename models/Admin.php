@@ -2,9 +2,9 @@
 
 namespace Model;
 
-class Admin extends ActiveRecord 
+class Admin extends ActiveRecord
 {
-    
+
     //** Propiedades */
     public $usuario;
     public $password;
@@ -17,7 +17,7 @@ class Admin extends ActiveRecord
     }
 
     //** --------------------------------------------------------- */
-    
+
     //** Validando los campos del formulario. */ 
     public function validar()
     {
@@ -38,7 +38,7 @@ class Admin extends ActiveRecord
         //** Revisar si el usuario existe.
         $query = "SELECT fun_usuarioAdmin('$this->usuario', '$this->password') as usuarioExiste";
         $resultado = self::$db->query($query);
-        
+
         if ($resultado === false) {
             self::$errores[] = 'Error al ejecutar la consulta.';
             return;
@@ -52,7 +52,7 @@ class Admin extends ActiveRecord
         }
         return $resultado;
     }
-    
+
     //** --------------------------------------------------------- */
 
     //** Autenticar al usuario. */
@@ -76,5 +76,4 @@ class Admin extends ActiveRecord
         //** Redirigir a la página admin.
         header('Location: /admin');
     }
-
 }

@@ -2,7 +2,7 @@
     <?php foreach ($productos as $producto) : ?>
         <div class="producto">
             <div class="imgcont">
-            <img class="productimg" loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="producto">
+                <img class="productimg" loading="lazy" src="/imagenes/<?php echo $producto->imagen; ?>" alt="producto">
             </div>
             <div class="contenido-producto">
                 <h3><?php echo $producto->nombre; ?></h3>
@@ -15,15 +15,16 @@
                 <p class="talla-marca"><?php echo $producto->estado; ?></p>
 
                 <div class="iconos">
-                    <a href="#">
-                        <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono habitaciones">
-                    </a>  
-                    
-                    <a href="#">
-                        <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono habitaciones">
+                    <a href="#" class="btnCarrito" data-id="<?php echo $producto->id; ?>" data-precio="<?php echo $producto->precio; ?>" data-descripcion="<?php echo $producto->descripcion; ?>" data-imagen="<?php echo $producto->imagen; ?>">
+                        <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono carrito">
+
                     </a>
-                
-                
+
+                    <a href="#">
+                        <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono favorito">
+                    </a>
+
+
                 </div>
 
                 <a href="producto?id=<?php echo $producto->id; ?>" class="boton-amarillo-block">

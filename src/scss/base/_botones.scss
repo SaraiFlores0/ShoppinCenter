@@ -1,16 +1,16 @@
 .boton-amarillo {
-    @include boton($amarillo, inline-block);
+    @include boton($naranjaObscuro, inline-block);
 }
 
 .boton-amarillo-block {
-    @include boton($amarillo, block);
+    @include boton($naranjaObscuro, block);
     border-radius: 12px;
     box-shadow: 0px 10px 20px rgba(201, 128, 34, 0.356);
     transition: .4s;
 }
 
-.boton-verde {
-    @include boton($verde, inline-block);
+.boton-naranja {
+    @include boton($naranja, inline-block);
 }
 
 .boton-rojo-block {
@@ -18,5 +18,5 @@
    width: 100%;
 }
 .boton-verde-block {
-    @include boton($verde, block);
+    @include boton($naranja, block);
 }

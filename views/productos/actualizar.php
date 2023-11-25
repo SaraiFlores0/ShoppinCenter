@@ -8,16 +8,16 @@
     <?php }
     ?>
 
-    <a href="/admin" class="boton boton-verde">Volver</a>
+    <a href="/admin" class="boton boton-naranja">Volver</a>
 
-    <?php foreach($errores as $error): ?>
-    <div class="alerta error">
-        <?php echo $error; ?>
-    </div>
+    <?php foreach ($errores as $error) : ?>
+        <div class="alerta error">
+            <?php echo $error; ?>
+        </div>
     <?php endforeach; ?>
 
-    <form class="formulario" method="POST"  enctype="multipart/form-data">
+    <form class="formulario" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/formulario.php'; ?>
-        <input type="submit" value="Actualizar Producto" class="boton boton-verde">
+        <input type="submit" value="Actualizar Producto" class="boton boton-naranja">
     </form>
 </main>

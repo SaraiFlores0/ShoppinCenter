@@ -1,2 +1,2 @@
 
-<a href="productos/crear" class="boton boton-verde">Nuevo Producto</a>
+<a href="productos/crear" class="boton boton-naranja">Nuevo Producto</a>

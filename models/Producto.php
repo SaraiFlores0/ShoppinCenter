@@ -21,7 +21,6 @@ class Producto extends ActiveRecord
     public $devolucion;
     public $fecha;
 
-
     //** Constructor. */
     public function __construct($args = [])
     {
@@ -167,7 +166,7 @@ class Producto extends ActiveRecord
         '$this->devolucion',
         '$this->fecha',
         @respuesta);";
-        // Liberar los resultados para evitar el error "Commands out of sync"
+        //* Liberar los resultados para evitar el error "Commands out of sync"
         while (self::$db->more_results()) {
             self::$db->next_result();
             if ($result = self::$db->store_result()) {

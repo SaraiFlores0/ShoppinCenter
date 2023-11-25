@@ -77,4 +77,7 @@ class Usuario extends ActiveRecord
         header('Location: /');
     }
     
+    public function devolverUsuario(){
+        return $this->usuario;
+    } 
 }
