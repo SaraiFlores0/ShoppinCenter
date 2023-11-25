@@ -19,24 +19,24 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
 <?php } ?>
 
 <main class="contenedor seccion contenido-centrado">
-
-    <a href="/carrito/agregar" class="boton boton-naranja">Volver a Carrito</a>
-
-    <form method="POST" class="formulario" novalidate>
+<h1>Confirmación de Pedido</h1>
+    <a href="/carrito/agregar" class="boton boton-naranja">Volver a Carrito</a><br>
+<br>
+    <form  method="POST" class="formulario" novalidate>
         <fieldset>
-            <legend>1. Ingreso de Datos Personales</legend>
+            <legend>1. Confirmación de Datos (Datos segun tu Usuario) </legend>
 
             <label for="email">Nombre Completo</label>
-            <input type="text" name="nombre" placeholder="Nombres" id="nombre">
+            <input type="text" name="nombre" placeholder="" id="nombre" value="<?php echo $producto->nombres; ?>" disabled>
 
             <label for="email">Correo electronico</label>
-            <input type="text" name="mail" placeholder="Correo" id="mail">
+            <input type="text" name="mail" placeholder="Correo" id="mail" value="<?php echo $producto->correo; ?>" disabled>
 
             <label for="email">Telefono</label>
-            <input type="text" name="phone" placeholder="Telefono" id="phone">
+            <input type="text" name="phone" placeholder="Telefono" id="phone" value="<?php echo $producto->telefono; ?>" disabled> 
 
             <label for="email">DUI</label>
-            <input type="text" name="dui" placeholder="Dui" id="dui">
+            <input type="text" name="dui" placeholder="Dui" id="dui" value="<?php echo $producto->dui; ?>" disabled>
 
 
         </fieldset>
@@ -44,10 +44,10 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
             <legend>2. Direccion de Envio</legend>
 
             <label for="direccion">Dato de Direccion</label>
-            <input type="text" name="direccion" placeholder="Dirección" id="direccion">
+            <input type="text" name="direccion" placeholder="Dirección" id="direccion" value="<?php echo $producto->direccion; ?>" disabled>
 
             <label for="city">Ciudad - Departamento</label>
-            <input type="text" name="city" placeholder="Ciudad y Departamento" id="city">
+            <input type="text" name="city" placeholder="Ciudad y Departamento" id="city" value="<?php echo $producto->departamento; ?>" disabled>
 
 
 
@@ -58,7 +58,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
             <p>Selecciona como deseas recibir tu pedido.</p>
 
 
-            <input type="radio" name="rad1" placeholder="Tu Usuario" id="rad1">
+            <input type="radio" name="rad1" placeholder="Tu Usuario" id="rad1" checked> 
             <label for="rad1">Recoger en Sucursal</label>
 
             <p>Selecciona Forma de Pago.</p>
@@ -95,7 +95,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Descripción</th>
-                <th>Quitar</th>
+                <th style="display: none;">Quitar</th>
             </tr>
         </thead>
         <tbody>
@@ -110,7 +110,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
                         <td>
                             <form method="GET" action="/carrito/eliminar" class="w-100">
                                 <input type="hidden" name="id_carrito" value="<?php echo $producto['IdCarrito']; ?>">
-                                <button type="submit" class="boton-rojo-block" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                                <button style="display: none;" type="submit" class="boton-rojo-block" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
                                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </button>
                             </form>

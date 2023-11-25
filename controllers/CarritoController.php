@@ -113,29 +113,71 @@ class CarritoController
 
      //** CHECKOUT */
      public static function comprar(Router $router)
+    {
+        //** ORDENAR PEDIDO CONFIRMAR */
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $router->render('carrito/success', [
+               
+                
+            ]);
+        }
+
+
+        //** Obtener el usuario autenticado.
+        $Usuario = $_SESSION['usuario'] ?? null;
+
+        $carrito = new Carrito();
+        $errores = $carrito->validar();
+
+        // Obtener los datos del producto
+        $producto = Carrito::find($_SESSION['nombreUsuario']);
+
+        if (empty($errores)) {
+            $totalCarrito = $carrito->obtenerTotalCarrito($Usuario);
+            $carritoProductos = $carrito->obtenerProductodeCarrito($Usuario);
+        }
+
+        //** Mostrar a la vista. */    
+        $router->render('carrito/checkout', [
+            'totalCarrito' => $totalCarrito,
+            'carrito' => $carritoProductos,
+            'errores' => $errores,
+
+            'producto' => $producto
+        ]);
+    }
+
+
+
+     public static function producto(Router $router)
      {
+         $id = validarORedireccionar('/producto');
  
-         
-             //** Obtener el usuario autenticado.
-             $Usuario = $_SESSION['usuario'] ?? null;
-        
-         $carrito = new Carrito();
-         $errores = $carrito->validar();
+         // Obtener los datos del producto
+         $producto = Carrito::find($id);
  
-       
- 
-         if (empty($errores)) {
-             $totalCarrito = $carrito->obtenerTotalCarrito($Usuario);
-             $carritoProductos=$carrito->obtenerProductodeCarrito($Usuario);
-         }
- 
-         //** Mostrar a la vista. */    
-         $router->render('carrito/checkout', [
-             'totalCarrito' => $totalCarrito,
-             'carrito' => $carritoProductos,
-             'errores' => $errores
+         $router->render('paginas/producto', [
+             'producto' => $producto
          ]);
      }
+
+      //** --------------------------------------------------------- */
+
+    
+    public static function confirmarPedido(Router $router)
+    {
+       
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $router->render('paginas/index', [
+               
+
+            ]);
+        }
+
+       
+    }
+
  
      //** --------------------------------------------------------- */
 }

@@ -121,4 +121,40 @@ class Carrito extends ActiveRecord
 
         return $resultado;
     }
+
+
+
+      //** --------------------------------------------------------- */
+
+    //** Busca un USUARIO por su NAME. */
+    public static function find($nombreusuario)
+    {
+        $query = "CALL pa_obtenercliente('$nombreusuario');";
+   
+        $resultado = self::consultarSQL($query);
+
+        if ($resultado && count($resultado) > 0) {
+            return $resultado[0]; //* Devuelve el primer elemento del array
+        } else {
+            return null;
+        }
+    }
+    public static function consultarSQL($query)
+    {
+        //* Consultar la base de datos
+        $resultado = self::$db->query($query);
+        //* Iterar los resultados
+        $array = [];
+        while ($registro = $resultado->fetch_assoc()) {
+            $array[] = static::crearObjetoCliente($registro);
+        }
+
+        //* liberar la memoria
+        $resultado->free();
+
+        //* retornar los resultados
+        return $array;
+    }
+
+    //** --------------------------------------------------------- */
 }

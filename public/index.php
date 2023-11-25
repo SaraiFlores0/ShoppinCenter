@@ -25,6 +25,8 @@ $router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']
 
 //CHECKOUT VISTA
 $router->get('/carrito/comprar', [CarritoController::class, 'comprar']);
+//CHECKOUT VISTA POST
+$router->post('/carrito/comprar', [CarritoController::class, 'comprar']);
 
 // * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
