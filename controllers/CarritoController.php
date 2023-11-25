@@ -109,4 +109,31 @@ class CarritoController
             }
         }
     }
+
+
+     //** CHECKOUT */
+     public static function comprar(Router $router)
+     {
+ 
+         
+             //** Obtener el usuario autenticado.
+             $Usuario = $_SESSION['usuario'] ?? null;
+        
+         $carrito = new Carrito();
+         $errores = $carrito->validar();
+ 
+       
+ 
+         if (empty($errores)) {
+             $totalCarrito = $carrito->obtenerTotalCarrito($Usuario);
+         }
+ 
+         //** Mostrar a la vista. */    
+         $router->render('carrito/checkout', [
+             'carrito' => $totalCarrito,
+             'errores' => $errores
+         ]);
+     }
+ 
+     //** --------------------------------------------------------- */
 }

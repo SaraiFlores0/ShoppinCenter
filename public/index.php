@@ -23,6 +23,9 @@ $router->get('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCa
 $router->get('/carrito/cantidad', [CarritoController::class, 'obtenerCantidadEnCarrito']);
 $router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']);
 
+//CHECKOUT VISTA
+$router->get('/carrito/comprar', [CarritoController::class, 'comprar']);
+
 // * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
 $router->get('/productos', [PaginasController::class, 'productos']);
