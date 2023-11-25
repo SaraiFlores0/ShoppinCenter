@@ -8,6 +8,8 @@ class ActiveRecord
     //** Base De Datos.  */
     protected static $db;
 
+    public $imagen = '';
+
     //** Errores. */ 
     protected static $errores = [];
 
@@ -102,24 +104,22 @@ class ActiveRecord
 
     //** --------------------------------------------------------- */
 
-    //** Subida de imagen. */ 
     public function setImagen($imagen)
     {
-        $producto = new Producto;
-        if (!is_null($producto->imagen)) {
+        //* Si la imagen actual no es nula, borrar la imagen
+        if (!is_null($this->imagen)) {
             $this->borrarImagen();
         }
-        //** Asignar al atributo de imagen el nombre de la imagen */ 
-        if ($imagen) {
-            $producto->imagen = $imagen;
-        }
+
+        //* Asignar al atributo de imagen el nombre de la nueva imagen
+        $this->imagen = $imagen;
     }
 
     //** Elimina la imagen. */ 
     public function borrarImagen()
     {
         $producto = new Producto;
-        // Comprobar si existe el archivo
+        //* Comprobar si existe el archivo
         $rutaImagen = CARPETA_IMAGENES . $producto->imagen;
         if (is_file($rutaImagen)) {
             if (unlink($rutaImagen)) {
@@ -130,6 +130,7 @@ class ActiveRecord
         }
     }
 
+    //** --------------------------------------------------------- */
 
     public function sincronizar($args = [])
     {

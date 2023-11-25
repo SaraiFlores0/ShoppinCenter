@@ -8,7 +8,7 @@
     <?php }
     ?>
 
-    <a href="/admin" class="boton boton-verde">Volver</a>
+    <a href="/admin" class="boton boton-naranja">Volver</a>
 
     <?php foreach ($errores as $error) : ?>
         <div class="alerta error">
@@ -18,6 +18,6 @@
 
     <form id="formulario" class="formulario" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/formulario.php'; ?>
-        <input type="submit" value="Crear Producto" class="boton boton-verde">
+        <input type="submit" value="Crear Producto" class="boton boton-naranja">
     </form>
 </main>

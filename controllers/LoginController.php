@@ -8,7 +8,7 @@ use Model\Usuario;
 
 class LoginController
 {
-    
+
     //** Login del Admin */
     public static function loginAdmin(Router $router)
     {
@@ -72,5 +72,4 @@ class LoginController
         $_SESSION = [];
         header('Location: /');
     }
-
 }

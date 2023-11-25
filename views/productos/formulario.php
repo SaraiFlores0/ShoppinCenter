@@ -111,7 +111,6 @@
         <option value="Distribuidora LEYLA" <?php echo ($producto->proveedor === 'Distribuidora LEYLA') ? 'selected' : ''; ?>>Distribuidora LEYLA</option>
         <option value="PINK CLOTHES" <?php echo ($producto->proveedor === 'PINK CLOTHES') ? 'selected' : ''; ?>>PINK CLOTHES</option>
         <option value="CANADIAN CL"><?php echo ($producto->proveedor === 'CANADIAN CL') ? 'selected' : ''; ?> CANADIAN CL</option>
-        <!-- Agrega más opciones si es necesario -->
     </select>
 
     <!-- Entradas del producto -->

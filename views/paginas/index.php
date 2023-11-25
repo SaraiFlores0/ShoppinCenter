@@ -1,6 +1,6 @@
 <img src="build/img/ban1.jpg" alt="">
 <main class="contenedor seccion">
-    
+
     <h1>Más Sobre Nosotros</h1>
 
     <div class="iconos-nosotros">
@@ -25,12 +25,12 @@
 <section class="seccion contenedor">
     <h2><strong>Productos en venta</strong></h2>
 
-    <?php 
-        include 'listado.php';
+    <?php
+    include 'listado.php';
     ?>
 
     <div class="alinear-derecha">
-        <a href="/productos" class="boton-verde">Ver Todas</a>
+        <a href="/productos" class="boton-naranja">Ver Todas</a>
     </div>
 </section>
 
@@ -74,7 +74,7 @@
                     <p class="informacion-meta">Escrito el: <span>11/11/2023</span> por: <span>Admin</span> </p>
 
                     <p>
-                        Consejos para cuidar tu ropa.
+                        Consejos que tu ropa huela siempre bien.
                     </p>
                 </a>
             </div>

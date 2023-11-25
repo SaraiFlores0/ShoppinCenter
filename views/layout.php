@@ -1,6 +1,7 @@
 <?php
 
-// Verificar si la sesión está iniciada
+use Model\Carrito;
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -12,6 +13,12 @@ $nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
 
 // Inicializar la variable $inicio
 $inicio = isset($inicio) ? $inicio : false;
+
+$carrito = new Carrito();
+
+// Obtener la cantidad de productos en el carrito
+$cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombreUsuario); 
+
 
 ?>
 <!DOCTYPE html>
@@ -39,32 +46,35 @@ $inicio = isset($inicio) ? $inicio : false;
                 </div>
 
                 <div class="derecha">
-                    <div >
-                    <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
-                    <img class="dark-mode-boton" src="/build/img/carrito.svg">
-                    
+                    <div>
+                        <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
+                        <div class="contenedor-carrito">
+                            <a href="/carrito/agregar">
+                                <img class="boton-carrito" src="/build/img/carrito.svg" alt="Carrito de compras">
+                                <div class="texto-carrito"><?php echo $cantidadProductosEnCarrito ?? 0; ?></div>
+                            </a>
+                        </div>
+
+                        <nav class="navegacion">
+                            <a href="/loginUsuario">Iniciar Sesión</a>
+                            <a href="/">Premium Damas</a>
+                            <a href="/">Super Premium Damas</a>
+                            <a href="/">Premium Caballeros</a>
+                            <a href="/">Super Premium Caballeros</a>
+                            <?php if ($auth) : ?>
+                                <a href="/logout">Cerrar Sesión</a>
+                            <?php endif; ?>
+                        </nav>
                     </div>
-                    
-                    <nav class="navegacion">
-                        <a href="/loginUsuario">Iniciar Sesión</a>
-                        <a href="/">Premium Damas</a>
-                        <a href="/">Super Premium Damas</a>
-                        <a href="/">Premium Caballeros</a>
-                        <a href="/">Super Premium Caballeros</a>
-                        <?php if ($auth) : ?>
-                            <a href="/logout">Cerrar Sesión</a>
-                        <?php endif; ?>
-                    </nav>
-                </div>
 
-            </div> <!--.barra-->
+                </div> <!--.barra-->
 
-            <?php if (!$auth) {
-                echo $inicio ? "" : '';
-            } else {
-                echo $inicio ? "<h1>Bienvenido/a, $nombreUsuario</h1>" : '';
-            } ?>
-        </div>
+                <?php if (!$auth) {
+                    echo $inicio ? "" : '';
+                } else {
+                    echo $inicio ? "<h1>Bienvenido/a, $nombreUsuario</h1>" : '';
+                } ?>
+            </div>
     </header>
 
 
@@ -86,6 +96,7 @@ $inicio = isset($inicio) ? $inicio : false;
     </footer>
 
     <script src="/build/js/bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/ec52bebc8a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

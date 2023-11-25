@@ -18,6 +18,6 @@
             <input type="password" name="password" placeholder="Tu Password" id="password">
         </fieldset>
     
-        <input type="submit" value="Iniciar Sesión" class="boton boton-verde">
+        <input type="submit" value="Iniciar Sesión" class="boton boton-naranja">
     </form>
 </main>

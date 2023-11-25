@@ -7,6 +7,7 @@ use MVC\Router;
 use Controllers\PaginasController;
 use Controllers\ProductoController;
 use Controllers\LoginController;
+use Controllers\CarritoController;
 
 
 $router = new Router();
@@ -17,7 +18,10 @@ $router->post('/productos/crear', [ProductoController::class, 'crear']);
 $router->get('/productos/actualizar', [ProductoController::class, 'actualizar']);
 $router->post('/productos/actualizar', [ProductoController::class, 'actualizar']);
 $router->post('/productos/eliminar', [ProductoController::class, 'eliminar']);
-
+$router->post('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCarrito']);
+$router->get('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCarrito']);
+$router->get('/carrito/cantidad', [CarritoController::class, 'obtenerCantidadEnCarrito']);
+$router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']);
 
 // * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
