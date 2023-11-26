@@ -17,7 +17,7 @@ $inicio = isset($inicio) ? $inicio : false;
 $carrito = new Carrito();
 
 // Obtener la cantidad de productos en el carrito
-$cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombreUsuario); 
+$cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombreUsuario);
 
 
 ?>
@@ -86,9 +86,9 @@ $cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombr
             <nav class="navegacion">
                 <a href="/loginUsuario">Iniciar Sesión</a>
                 <a href="/productos/premium-damas">Premium Damas</a>
-                            <a href="/productos/super-premium-damas">Super Premium Damas</a>
-                            <a href="/productos/premium-caballeros">Premium Caballeros</a>
-                            <a href="/productos/super-premium-caballeros">Super Premium Caballeros</a>
+                <a href="/productos/super-premium-damas">Super Premium Damas</a>
+                <a href="/productos/premium-caballeros">Premium Caballeros</a>
+                <a href="/productos/super-premium-caballeros">Super Premium Caballeros</a>
             </nav>
         </div>
 

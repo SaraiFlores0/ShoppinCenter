@@ -31,6 +31,7 @@ $router->get('/productos/super-premium-damas', [PaginasController::class, 'produ
 $router->get('/productos/premium-caballeros', [PaginasController::class, 'productosPremiumC']);
 $router->get('/productos/super-premium-caballeros', [PaginasController::class, 'productosSuPremiumC']);
 $router->get('/producto', [PaginasController::class, 'producto']);
+$router->get('/productos/producto', [PaginasController::class, 'producto']);
 
 $router->get('/loginAdmin', [LoginController::class, 'loginAdmin']);
 $router->post('/loginAdmin', [LoginController::class, 'loginAdmin']);
