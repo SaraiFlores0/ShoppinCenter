@@ -140,4 +140,16 @@ class ActiveRecord
             }
         }
     }
+    public static function productoCategoria($categoria) {
+        
+        $query = "CALL obtener_productos_por_categoria($categoria)";
+
+        $resultado = self::consultarSQL($query);
+        
+        if ($resultado && count($resultado) > 0) {
+            return $resultado;
+        } else {
+            return null;
+        }
+      }
 }
