@@ -22,7 +22,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
 <h1>Confirmación de Pedido</h1>
     <a href="/carrito/agregar" class="boton boton-naranja">Volver a Carrito</a><br>
 <br>
-    <form  method="POST" class="formulario" novalidate>
+    <form  method="POST" action="/carrito/datosCompra" class="formulario" novalidate>
         <fieldset>
             <legend>1. Confirmación de Datos (Datos segun tu Usuario) </legend>
 
@@ -48,6 +48,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
 
             <label for="city">Ciudad - Departamento</label>
             <input type="text" name="city" placeholder="Ciudad y Departamento" id="city" value="<?php echo $producto->departamento; ?>" disabled>
+            <input type="text" name="city" placeholder="Ciudad y Departamento" id="city" value="<?php echo $producto->municipio; ?>" disabled>
 
 
 
@@ -130,6 +131,10 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
                 <p style="font-size: 1.2em;">Total: $<?php echo $total ?? 0 ?> </p>
             </div>
             <hr class="linea-separadora">
+
+            <?php foreach ($carrito as $producto) : ?>
+        <input type="hidden" name="productos[]" value="<?php echo htmlspecialchars(json_encode($producto)); ?>">
+    <?php endforeach; ?>
 
             <input type="submit" value="Confirmar mi Pedido" class="boton boton-naranja">
         </fieldset>

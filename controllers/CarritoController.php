@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Model\Carrito;
+use Model\Cliente;
 use MVC\Router;
 use mysqli_result;
 
@@ -111,15 +112,12 @@ class CarritoController
     }
 
 
-     //** CHECKOUT */
-     public static function comprar(Router $router)
+    //** CHECKOUT */
+    public static function comprar(Router $router)
     {
         //** ORDENAR PEDIDO CONFIRMAR */
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $router->render('carrito/success', [
-               
-                
-            ]);
+            $router->render('carrito/success', []);
         }
 
 
@@ -149,35 +147,66 @@ class CarritoController
 
 
 
-     public static function producto(Router $router)
-     {
-         $id = validarORedireccionar('/producto');
- 
-         // Obtener los datos del producto
-         $producto = Carrito::find($id);
- 
-         $router->render('paginas/producto', [
-             'producto' => $producto
-         ]);
-     }
-
-      //** --------------------------------------------------------- */
-
-    
-    public static function confirmarPedido(Router $router)
+    public static function producto(Router $router)
     {
-       
+        $id = validarORedireccionar('/producto');
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $router->render('paginas/index', [
-               
+        // Obtener los datos del producto
+        $producto = Carrito::find($id);
 
-            ]);
-        }
-
-       
+        $router->render('paginas/producto', [
+            'producto' => $producto
+        ]);
     }
 
- 
+    //** --------------------------------------------------------- */
+
+
+    public static function confirmarPedido(Router $router)
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $router->render('paginas/index', []);
+        }
+    }
+    
      //** --------------------------------------------------------- */
+
+    public static function datosCompra(){
+
+        $usuarioActual = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+        //* Verificar si el usuario está autenticado
+        if (!isset($_SESSION['usuario'])) {
+            echo '<div id="mensaje-advertencia" class="alerta advertencia">';
+            echo '<img class="icono-alerta" loading="lazy" src="/build/img/peligro.png" alt="Icono Alerta">';
+            echo '<p class="text-advertencia">Por favor, inicie sesión antes de añadir productos al carrito.</p>';
+            echo '</div>';
+        } else {
+
+            $compra = new Cliente;
+
+            $productosData = isset($_POST['productos']) ? $_POST['productos'] : [];
+
+            foreach ($productosData as $productoJson) {
+                //* Decodificar la cadena JSON a un array asociativo
+                $producto = json_decode($productoJson, true);
+            
+                //* Verificar si la decodificación fue exitosa y si $producto es un array
+                if (is_array($producto)) {
+                    $idProducto = $producto['IdProducto'];
+                    $precioProducto = $producto['PrecioProducto'];
+            
+                    $compra->datosCompra($usuarioActual, $idProducto, $precioProducto);
+                } else {
+                    //* Manejar el caso en que la decodificación no sea exitosa
+                    echo 'Error al decodificar la cadena JSON: ' . json_last_error_msg();
+                }
+            }
+            $compra->stockProducto($usuarioActual);
+
+        }
+    }
 }
+

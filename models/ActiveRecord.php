@@ -104,25 +104,26 @@ class ActiveRecord
 
     //** --------------------------------------------------------- */
 
-     //** --------------------------------------------------------- */
+    //** --------------------------------------------------------- */
 
-     protected static function crearObjetoCliente($registro)
-     {
-         $cliente = new Cliente;
- 
-         $cliente->id = $registro['ID_Usuario'];
-         $cliente->nombres = $registro['nombres_cliente'];
-         $cliente->correo = $registro['correo'];
-         $cliente->telefono = $registro['telefono'];
-         $cliente->dui = $registro['dui'];
-         $cliente->direccion = $registro['Direccion'];
-         $cliente->departamento = $registro['Nombre_Departamento'];
-      
- 
-         return $cliente;
-     }
- 
-     //** --------------------------------------------------------- */
+    protected static function crearObjetoCliente($registro)
+    {
+        $cliente = new Cliente;
+
+        $cliente->id = $registro['ID_Usuario'];
+        $cliente->nombres = $registro['nombres_cliente'];
+        $cliente->correo = $registro['correo'];
+        $cliente->telefono = $registro['telefono'];
+        $cliente->dui = $registro['dui'];
+        $cliente->direccion = $registro['Direccion'];
+        $cliente->departamento = $registro['Nombre_Departamento'];
+        $cliente->municipio = $registro['Nombre_Municipio'];
+
+
+        return $cliente;
+    }
+
+    //** --------------------------------------------------------- */
 
     public function setImagen($imagen)
     {
