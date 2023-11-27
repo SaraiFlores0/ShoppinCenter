@@ -105,4 +105,56 @@ class Carrito extends ActiveRecord
 
         return $resultado;
     }
+
+    //** Agrega el producto al carrito */
+    public function obtenerProductodeCarrito($usuario)
+    {
+        $query = "SELECT * FROM vistaCarrrito WHERE UsuarioCarrito=(SELECT u.ID_Usuario FROM usuarios u WHERE u.Usuario='$usuario');";
+
+        while (self::$db->more_results()) {
+            self::$db->next_result();
+            if ($result = self::$db->store_result()) {
+                $result->free();
+            }
+        }
+        $resultado = self::$db->query($query);
+
+        return $resultado;
+    }
+
+
+
+      //** --------------------------------------------------------- */
+
+    //** Busca un USUARIO por su NAME. */
+    public static function find($nombreusuario)
+    {
+        $query = "CALL pa_obtenercliente('$nombreusuario');";
+   
+        $resultado = self::consultarSQL($query);
+
+        if ($resultado && count($resultado) > 0) {
+            return $resultado[0]; //* Devuelve el primer elemento del array
+        } else {
+            return null;
+        }
+    }
+    public static function consultarSQL($query)
+    {
+        //* Consultar la base de datos
+        $resultado = self::$db->query($query);
+        //* Iterar los resultados
+        $array = [];
+        while ($registro = $resultado->fetch_assoc()) {
+            $array[] = static::crearObjetoCliente($registro);
+        }
+
+        //* liberar la memoria
+        $resultado->free();
+
+        //* retornar los resultados
+        return $array;
+    }
+
+    //** --------------------------------------------------------- */
 }

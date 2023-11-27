@@ -20,8 +20,14 @@ $router->post('/productos/actualizar', [ProductoController::class, 'actualizar']
 $router->post('/productos/eliminar', [ProductoController::class, 'eliminar']);
 $router->post('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCarrito']);
 $router->get('/carrito/agregar', [CarritoController::class, 'agregarProductoAlCarrito']);
-$router->get('/carrito/cantidad', [CarritoController::class, 'obtenerCantidadEnCarrito']);
 $router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']);
+$router->get('/carrito/eliminar', [CarritoController::class, 'eliminarProducto']);
+
+//CHECKOUT VISTA
+$router->get('/carrito/comprar', [CarritoController::class, 'comprar']);
+//CHECKOUT VISTA POST
+$router->post('/carrito/comprar', [CarritoController::class, 'comprar']);
+$router->post('/carrito/datosCompra', [CarritoController::class, 'datosCompra']);
 
 // * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
