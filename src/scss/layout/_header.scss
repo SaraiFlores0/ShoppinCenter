@@ -8,13 +8,14 @@
 .header {
     background-color: $grisOscuro;
     padding: 1rem 0 3rem 0;
+    min-height: 40rem;
 
     &.inicio {
         background-position: center center;
         background-size: cover;
 
         @include tablet {
-            min-height: unset;
+            min-height: 40rem;
         }
 
         .contenido-header {
@@ -30,11 +31,15 @@
     flex-direction: column;
     justify-content: space-between;
 
-    h1 {
+    h1, h2 {
         text-align: center;
         color: $blanco;
         font-weight: $bold;
         line-height: 20px;
         max-width: 100%;
+    }
+
+    h2{
+        margin-top: 8rem;
     }
 }

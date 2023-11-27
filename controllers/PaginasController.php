@@ -82,4 +82,34 @@ class PaginasController
             'productos' => $productos
         ]);
     }
+    public static function productosPremiumP(Router $router)
+    {
+        $categoria = 7;
+
+        $productos = Producto::productoCategoria($categoria);
+
+        $router->render('paginas/productos', [
+            'productos' => $productos
+        ]);
+    }
+    public static function productosPremiumI(Router $router)
+    {
+        $categoria = 9;
+
+        $productos = Producto::productoCategoria($categoria);
+
+        $router->render('paginas/productos', [
+            'productos' => $productos
+        ]);
+    }
+    public static function productosPremiumV(Router $router)
+    {
+        $categoria = 13;
+
+        $productos = Producto::productoCategoria($categoria);
+
+        $router->render('paginas/productos', [
+            'productos' => $productos
+        ]);
+    }
 }
