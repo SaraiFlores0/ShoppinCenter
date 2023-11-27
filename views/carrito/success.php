@@ -19,7 +19,7 @@ $mensaje = "Por favor, inicie sesión antes de añadir productos al carrito.";
 <?php } ?>
 
 <main class="contenedor seccion contenido-centrado" style="margin-top: 100px; margin-bottom: 100px;">
-    <h1>Muchas Gracias por Realizar tu Pedido!</h1>
+    <h1>¡Gracias por tu compra, pronto nos contactaremos contigo!</h1>
     <center>
         <a href="/" class="boton boton-naranja">Volver al Inicio</a><br>
     </center>
