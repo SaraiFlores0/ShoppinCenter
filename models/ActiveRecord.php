@@ -78,6 +78,27 @@ class ActiveRecord
         return $array;
     }
 
+
+
+    
+    public static function consultarSQLCat($query)
+    {
+        //* Consultar la base de datos
+        $resultado = self::$db->query($query);
+        //* Iterar los resultados
+        $array = [];
+        while ($registro = $resultado->fetch_assoc()) {
+            $array[] = static::crearObjetoCat($registro);
+        }
+
+        //* liberar la memoria
+        $resultado->free();
+
+        //* retornar los resultados
+        return $array;
+    }
+
+
     //** --------------------------------------------------------- */
 
     protected static function crearObjeto($registro)
@@ -99,6 +120,27 @@ class ActiveRecord
         $producto->fecha = $registro['Fecha de Ingreso'];
         $producto->devolucion = $registro['Devolucion'];
 
+        return $producto;
+    }
+
+
+    protected static function crearObjetoCat($registro)
+    {
+        $producto = new Producto;
+
+        $producto->id = $registro['Id'];
+        $producto->imagen = $registro['Imagen'];
+        $producto->nombre = $registro['NombreProducto'];
+        $producto->precio = $registro['PrecioProducto'];
+        $producto->descripcion = $registro['Descripcion'];
+        $producto->marca = $registro['MarcaProducto'];
+        $producto->talla = $registro['TallaProducto'];
+        $producto->estado = $registro['EstadoProducto'];
+        $producto->categorias = $registro['Categoria'];
+        $producto->proveedor = $registro['Proveedor'];
+        $producto->entradas = $registro['Entradas'];
+        $producto->salidas = $registro['Salidas'];
+        $producto->fecha = $registro['Fecha de Ingreso'];
         return $producto;
     }
 
@@ -166,7 +208,7 @@ class ActiveRecord
 
         $query = "CALL 	pa_vistaProductosCat($categoria)";
 
-        $resultado = self::consultarSQL($query);
+        $resultado = self::consultarSQLCat($query);
 
         if ($resultado && count($resultado) > 0) {
             return $resultado;

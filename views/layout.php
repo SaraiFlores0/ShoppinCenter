@@ -1,6 +1,7 @@
 <?php
 
 use Model\Carrito;
+use Model\Favoritos;
 
 if (!isset($_SESSION)) {
     session_start();
@@ -19,6 +20,10 @@ $carrito = new Carrito();
 // Obtener la cantidad de productos en el carrito
 $cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombreUsuario);
 
+$fav = new Favoritos();
+
+// Obtener la cantidad de productos en el carrito
+$cantidadProductosEnFav = $fav->obtenerCantidadProductosEnFavs($nombreUsuario);
 
 ?>
 <!DOCTYPE html>
@@ -49,18 +54,30 @@ $cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombr
                     <div>
                         <img class="dark-mode-boton" src="/build/img/dark-mode.svg">
                         <div class="contenedor-carrito">
+                            <a href="/fav/agregar">
+                                <img class="boton-carrito" src="/build/img/fav.png" alt="Productos Fav">
+                                <div class="texto-carrito"><?php echo $cantidadProductosEnFav ?? 0; ?></div>
+                            </a>
+                        </div>
+
+                        <div class="contenedor-carrito">
                             <a href="/carrito/agregar">
                                 <img class="boton-carrito" src="/build/img/carrito.svg" alt="Carrito de compras">
                                 <div class="texto-carrito"><?php echo $cantidadProductosEnCarrito ?? 0; ?></div>
                             </a>
                         </div>
 
+                        
                         <nav class="navegacion">
-                            <a href="/loginUsuario">Iniciar Sesión</a>
-                            <a href="/productos/premium-damas">Premium Damas</a>
-                            <a href="/productos/super-premium-damas">Super Premium Damas</a>
-                            <a href="/productos/premium-caballeros">Premium Caballeros</a>
-                            <a href="/productos/super-premium-caballeros">Super Premium Caballeros</a>
+                        <a href="/loginUsuario">Iniciar Sesión</a>
+                        <a href="/productos/premium-damas">Premium Damas</a>
+                        <a href="/productos/super-premium-damas">Super Premium Damas</a>
+                        <a href="/productos/premium-chaquetas">Premium Damas Chalecos y Chaquetas</a>
+                        <a href="/productos/super-premium-chaquetas">Super Premium Damas Chalecos y Chaquetas</a>
+                        <a href="/productos/premium-pantalon">Premium Damas Pantalones</a>
+                        <a href="/productos/premium-interior">Premium Damas Ropa Interior</a>
+                        <a href="/productos/premium-vestidos">Premium Damas Vestidos</a>
+                    
                             <?php if ($auth) : ?>
                                 <a href="/logout">Cerrar Sesión</a>
                             <?php endif; ?>
@@ -72,7 +89,7 @@ $cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombr
                 <?php if (!$auth) {
                     echo $inicio ? "" : '';
                 } else {
-                    echo $inicio ? "<h1>Bienvenido/a, $nombreUsuario</h1>" : '';
+                    echo $inicio ? "<h2>Bienvenido/a, $nombreUsuario</h2>" : '';
                 } ?>
             </div>
     </header>
@@ -87,8 +104,11 @@ $cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombr
                 <a href="/loginUsuario">Iniciar Sesión</a>
                 <a href="/productos/premium-damas">Premium Damas</a>
                 <a href="/productos/super-premium-damas">Super Premium Damas</a>
-                <a href="/productos/premium-caballeros">Premium Caballeros</a>
-                <a href="/productos/super-premium-caballeros">Super Premium Caballeros</a>
+                <a href="/productos/premium-chaquetas">Premium Damas Chalecos y Chaquetas</a>
+                <a href="/productos/super-premium-chaquetas">Super Premium Damas Chalecos y Chaquetas</a>
+                <a href="/productos/premium-pantalon">Premium Damas Pantalones</a>
+                <a href="/productos/premium-interior">Premium Damas Ropa Interior</a>
+                <a href="/productos/premium-vestidos">Premium Damas Vestidos</a>
             </nav>
         </div>
 

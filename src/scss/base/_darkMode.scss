@@ -15,7 +15,7 @@
         border: 1px solid $grisOscuro;
 
         .precio {
-            color: $verde;
+            color: $naranjaObscuro;
         }
         .icono {
             filter: invert(100%);
@@ -44,5 +44,10 @@
         }
     }
 
-  
+    table.productos {
+    
+            td {
+                color: $blanco;
+            }
+        }
 }

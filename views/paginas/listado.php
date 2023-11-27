@@ -16,12 +16,12 @@
 
                 <div class="iconos">
                     <a href="#" class="btnCarrito" data-id="<?php echo $producto->id; ?>" data-precio="<?php echo $producto->precio; ?>" data-descripcion="<?php echo $producto->descripcion; ?>" data-imagen="<?php echo $producto->imagen; ?>">
-                        <img class="icono" loading="lazy" src="build/img/carrito.png" alt="icono carrito">
+                        <img class="icono" loading="lazy" src="/build/img/carrito.png" alt="icono carrito">
 
                     </a>
 
-                    <a href="#">
-                        <img class="icono" loading="lazy" src="build/img/favorito.png" alt="icono favorito">
+                    <a href="#" class="btnFav" data-id="<?php echo $producto->id; ?>" data-precio="<?php echo $producto->precio; ?>" data-descripcion="<?php echo $producto->descripcion; ?>" data-imagen="<?php echo $producto->imagen; ?>">
+                        <img class="icono" loading="lazy" src="/build/img/favorito.png" alt="icono favorito">
                     </a>
 
 
