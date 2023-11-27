@@ -211,4 +211,5 @@ class Producto extends ActiveRecord
             return $resultado;
         }
     }
-}
+    
+    }

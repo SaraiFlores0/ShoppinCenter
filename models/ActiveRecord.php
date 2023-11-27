@@ -104,6 +104,27 @@ class ActiveRecord
 
     //** --------------------------------------------------------- */
 
+    //** --------------------------------------------------------- */
+
+    protected static function crearObjetoCliente($registro)
+    {
+        $cliente = new Cliente;
+
+        $cliente->id = $registro['ID_Usuario'];
+        $cliente->nombres = $registro['nombres_cliente'];
+        $cliente->correo = $registro['correo'];
+        $cliente->telefono = $registro['telefono'];
+        $cliente->dui = $registro['dui'];
+        $cliente->direccion = $registro['Direccion'];
+        $cliente->departamento = $registro['Nombre_Departamento'];
+        $cliente->municipio = $registro['Nombre_Municipio'];
+
+
+        return $cliente;
+    }
+
+    //** --------------------------------------------------------- */
+
     public function setImagen($imagen)
     {
         //* Si la imagen actual no es nula, borrar la imagen
@@ -138,6 +159,19 @@ class ActiveRecord
             if (property_exists($this, $key) && !is_null($value)) {
                 $this->$key = $value;
             }
+        }
+    }
+    public static function productoCategoria($categoria)
+    {
+
+        $query = "CALL 	pa_vistaProductosCat($categoria)";
+
+        $resultado = self::consultarSQL($query);
+
+        if ($resultado && count($resultado) > 0) {
+            return $resultado;
+        } else {
+            return null;
         }
     }
 }
