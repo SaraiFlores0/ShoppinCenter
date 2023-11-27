@@ -3,11 +3,11 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../includes/app.php';
 
 
-use MVC\Router;
+use Controllers\CarritoController;
+use Controllers\LoginController;
 use Controllers\PaginasController;
 use Controllers\ProductoController;
-use Controllers\LoginController;
-use Controllers\CarritoController;
+use MVC\Router;
 
 
 $router = new Router();
@@ -32,7 +32,12 @@ $router->post('/carrito/datosCompra', [CarritoController::class, 'datosCompra'])
 // * Vistas Públicas */
 $router->get('/', [PaginasController::class, 'index']);
 $router->get('/productos', [PaginasController::class, 'productos']);
+$router->get('/productos/premium-damas', [PaginasController::class, 'productosPremiumD']);
+$router->get('/productos/super-premium-damas', [PaginasController::class, 'productosSuPremiumD']);
+$router->get('/productos/premium-caballeros', [PaginasController::class, 'productosPremiumC']);
+$router->get('/productos/super-premium-caballeros', [PaginasController::class, 'productosSuPremiumC']);
 $router->get('/producto', [PaginasController::class, 'producto']);
+$router->get('/productos/producto', [PaginasController::class, 'producto']);
 
 $router->get('/loginAdmin', [LoginController::class, 'loginAdmin']);
 $router->post('/loginAdmin', [LoginController::class, 'loginAdmin']);
