@@ -173,7 +173,7 @@ class CarritoController
     
      //** --------------------------------------------------------- */
 
-    public static function datosCompra(){
+    public static function datosCompra(Router $router){
 
         $usuarioActual = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
@@ -187,26 +187,27 @@ class CarritoController
 
             $compra = new Cliente;
 
-            $productosData = isset($_POST['productos']) ? $_POST['productos'] : [];
+            // $productosData = isset($_POST['productos']) ? $_POST['productos'] : [];
 
-            foreach ($productosData as $productoJson) {
-                //* Decodificar la cadena JSON a un array asociativo
-                $producto = json_decode($productoJson, true);
+            // foreach ($productosData as $productoJson) {
+            //     //* Decodificar la cadena JSON a un array asociativo
+            //     $producto = json_decode($productoJson, true);
             
-                //* Verificar si la decodificación fue exitosa y si $producto es un array
-                if (is_array($producto)) {
-                    $idProducto = $producto['IdProducto'];
-                    $precioProducto = $producto['PrecioProducto'];
+            //     //* Verificar si la decodificación fue exitosa y si $producto es un array
+            //     if (is_array($producto)) {
+            //         $idProducto = $producto['IdProducto'];
+            //         $precioProducto = $producto['PrecioProducto'];
             
-                    $compra->datosCompra($usuarioActual, $idProducto, $precioProducto);
-                } else {
-                    //* Manejar el caso en que la decodificación no sea exitosa
-                    echo 'Error al decodificar la cadena JSON: ' . json_last_error_msg();
-                }
-            }
+            //         $compra->datosCompra($usuarioActual, $idProducto, $precioProducto);
+            //     } else {
+            //         //* Manejar el caso en que la decodificación no sea exitosa
+            //         echo 'Error al decodificar la cadena JSON: ' . json_last_error_msg();
+            //     }
+            // }
             $compra->stockProducto($usuarioActual);
 
         }
+        $router->render('carrito/success', []);
     }
 }
 
