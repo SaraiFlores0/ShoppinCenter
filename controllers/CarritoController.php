@@ -128,7 +128,7 @@ class CarritoController
         $errores = $carrito->validar();
 
         // Obtener los datos del producto
-        $producto = Carrito::find($_SESSION['nombreUsuario']);
+        $producto = Carrito::find($Usuario);
 
         if (empty($errores)) {
             $totalCarrito = $carrito->obtenerTotalCarrito($Usuario);
