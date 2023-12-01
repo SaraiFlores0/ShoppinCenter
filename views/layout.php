@@ -12,6 +12,8 @@ $auth = isset($_SESSION['loginUsuario']) || isset($_SESSION['loginAdmin']);
 
 $Usuario = $_SESSION['usuario'] ?? '';
 
+$nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+
 // Inicializar la variable $inicio
 $inicio = isset($inicio) ? $inicio : false;
 
