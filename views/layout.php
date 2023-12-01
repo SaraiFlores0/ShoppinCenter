@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 // Verificar si el usuario está autenticado
 $auth = isset($_SESSION['loginUsuario']) || isset($_SESSION['loginAdmin']);
 
-$nombreUsuario = $_SESSION['nombreUsuario'] ?? '';
+$Usuario = $_SESSION['usuario'] ?? '';
 
 // Inicializar la variable $inicio
 $inicio = isset($inicio) ? $inicio : false;
@@ -18,12 +18,12 @@ $inicio = isset($inicio) ? $inicio : false;
 $carrito = new Carrito();
 
 // Obtener la cantidad de productos en el carrito
-$cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($nombreUsuario);
+$cantidadProductosEnCarrito = $carrito->obtenerCantidadProductosEnCarrito($Usuario);
 
 $fav = new Favoritos();
 
 // Obtener la cantidad de productos en el carrito
-$cantidadProductosEnFav = $fav->obtenerCantidadProductosEnFavs($nombreUsuario);
+$cantidadProductosEnFav = $fav->obtenerCantidadProductosEnFavs($Usuario);
 
 ?>
 <!DOCTYPE html>
