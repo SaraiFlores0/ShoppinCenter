@@ -55,7 +55,8 @@ $router->post('/loginAdmin', [LoginController::class, 'loginAdmin']);
 
 $router->get('/loginUsuario', [LoginController::class, 'loginUsuario']);
 $router->post('/loginUsuario', [LoginController::class, 'loginUsuario']);
-$router->get('/logout', [LoginController::class, 'logout']);
+$router->get('/Registrousuario', [LoginController::class, 'RegistrarUsuario']);
+$router->post('/Registrousuario', [LoginController::class, 'RegistrarUsuario']);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
