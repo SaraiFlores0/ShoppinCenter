@@ -17,7 +17,7 @@ class Usuario extends ActiveRecord
     }
 
     //** --------------------------------------------------------- */
-    
+
     //** Validando los campos del formulario. */ 
     public function validar()
     {
@@ -38,7 +38,7 @@ class Usuario extends ActiveRecord
         //** Revisar si el usuario existe.
         $query = "SELECT fun_usuarioCliente('$this->usuario', '$this->password') as usuarioExiste;";
         $resultado = self::$db->query($query);
-        
+
         if ($resultado === false) {
             self::$errores[] = 'Error al ejecutar la consulta.';
             return;
@@ -52,7 +52,7 @@ class Usuario extends ActiveRecord
         }
         return $resultado;
     }
-    
+
     //** --------------------------------------------------------- */
 
     //** Autenticar al usuario. */
@@ -76,8 +76,11 @@ class Usuario extends ActiveRecord
         //** Redirigir a la página principal.
         header('Location: /');
     }
-    
-    public function devolverUsuario(){
+    public function devolverUsuario()
+    {
         return $this->usuario;
-    } 
+    }
+ 
+    
+
 }

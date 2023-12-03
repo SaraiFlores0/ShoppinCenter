@@ -67,17 +67,18 @@ $cantidadProductosEnFav = $fav->obtenerCantidadProductosEnFavs($nombreUsuario);
                             </a>
                         </div>
 
-                        
+
                         <nav class="navegacion">
-                        <a href="/loginUsuario">Iniciar Sesión</a>
-                        <a href="/productos/premium-damas">Premium Damas</a>
-                        <a href="/productos/super-premium-damas">Super Premium Damas</a>
-                        <a href="/productos/premium-chaquetas">Premium Damas Chalecos y Chaquetas</a>
-                        <a href="/productos/super-premium-chaquetas">Super Premium Damas Chalecos y Chaquetas</a>
-                        <a href="/productos/premium-pantalon">Premium Damas Pantalones</a>
-                        <a href="/productos/premium-interior">Premium Damas Ropa Interior</a>
-                        <a href="/productos/premium-vestidos">Premium Damas Vestidos</a>
-                    
+                            <a href="/Registrousuario">Registrarse</a>
+                            <a href="/loginUsuario">Iniciar Sesión</a>
+                            <a href="/productos/premium-damas">Premium Damas</a>
+                            <a href="/productos/super-premium-damas">Super Premium Damas</a>
+                            <a href="/productos/premium-chaquetas">Premium Damas Chalecos y Chaquetas</a>
+                            <a href="/productos/super-premium-chaquetas">Super Premium Damas Chalecos y Chaquetas</a>
+                            <a href="/productos/premium-pantalon">Premium Damas Pantalones</a>
+                            <a href="/productos/premium-interior">Premium Damas Ropa Interior</a>
+                            <a href="/productos/premium-vestidos">Premium Damas Vestidos</a>
+
                             <?php if ($auth) : ?>
                                 <a href="/logout">Cerrar Sesión</a>
                             <?php endif; ?>
@@ -101,6 +102,7 @@ $cantidadProductosEnFav = $fav->obtenerCantidadProductosEnFavs($nombreUsuario);
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
+                <a href="/Registrousuario">Registrarse</a>
                 <a href="/loginUsuario">Iniciar Sesión</a>
                 <a href="/productos/premium-damas">Premium Damas</a>
                 <a href="/productos/super-premium-damas">Super Premium Damas</a>
