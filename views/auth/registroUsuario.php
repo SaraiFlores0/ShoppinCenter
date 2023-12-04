@@ -18,7 +18,7 @@
             <input type="text" name="apellidos" placeholder="Tus Apellidos" id="apellidos" required>
 
             <label for="dui">DUI</label>
-            <input type="text" name="dui" placeholder="Tu DUI" id="dui" required>
+            <input type="text" name="dui" placeholder="Formato: 01234567-8" id="dui" required>
 
             <label for="direccion">Dirección</label>
             <input type="text" name="direccion" placeholder="Tu Dirección" id="direccion" required>
@@ -40,10 +40,10 @@
             </select>
 
             <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" placeholder="Tu Teléfono" id="telefono" required>
+            <input type="text" name="telefono" placeholder="Formato: 7777-0000" id="telefono" required>
 
             <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
+            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" min="1923-01-01" max="2005-01-01" required>
 
             <label for="sexo">Sexo</label>
             <select name="sexo" id="sexo" required>
