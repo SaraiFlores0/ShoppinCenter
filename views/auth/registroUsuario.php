@@ -72,26 +72,24 @@
 
         <input type="submit" value="Registrarse" class="boton boton-naranja">
     </form>
+   
 </main>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p id="modal-message"></p>
-    </div>
-</div>
 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    const mostrarContrasena = document.querySelector('.mostrar-contrasena');
-    const contrasenaInput = document.querySelector('#password');
-    
-    mostrarContrasena.addEventListener('click', function() {
-        const tipo = contrasenaInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        contrasenaInput.setAttribute('type', tipo);
-    
-        this.innerHTML = tipo === 'password' ? '&#128065;' : '&#128064;';
-    })
-    
+    $(document).ready(function() {
+        const mostrarContrasena = $('.mostrar-contrasena');
+        const contrasenaInput = $('#password');
+
+        mostrarContrasena.click(function() {
+            const tipo = contrasenaInput.attr('type') === 'password' ? 'text' : 'password';
+            contrasenaInput.attr('type', tipo);
+            this.innerHTML = tipo === 'password' ? '&#128065;' : '&#128064;';
+        });
+    });
 </script>
+
 
 
 <style>
@@ -100,7 +98,15 @@
         align-items: center;
     }
 
-   /* .texto-ver-contrasena {
+    .mensaje-exito {
+        color: green;
+    }
+
+    .mensaje-error {
+        color: red;
+    }
+
+    /* .texto-ver-contrasena {
         margin-left: 8px cursor: pointer;
     }*/
 </style>
