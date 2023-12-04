@@ -72,16 +72,17 @@ class LoginController
         session_start();
         $_SESSION = [];
         header('Location: /');
-    }public static function RegistrarUsuario(Router $router)
+    }
+    public static function RegistrarUsuario(Router $router)
     {
         $errores = [];
         $cliente = new Cliente();
         $departamentos = $cliente->obtenerDepartamentos();
-        $municipios =$cliente-> obtenerMunicipiosPorDepartamento(1);
+        $municipios = $cliente->obtenerMunicipiosPorDepartamento(1);
         $mensajeExito = null;
-    
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if(isset($_POST['nombres'], $_POST['apellidos'])) {
+            if (isset($_POST['nombres'], $_POST['apellidos'])) {
                 $cliente->nombres = $_POST['nombres'] ?? null;
                 $cliente->apellidos = $_POST['apellidos'] ?? null;
                 $cliente->dui = $_POST['dui'] ?? null;
@@ -93,7 +94,12 @@ class LoginController
                 $cliente->sexo = $_POST['sexo'] ?? null;
                 $cliente->correo = $_POST['correo'] ?? null;
                 $cliente->contraseña = $_POST['password'] ?? null;
-    
+
+                if ($cliente->fechaNacimiento) {
+                    $fechaFormateada = date('Y-m-d', strtotime($cliente->fechaNacimiento));
+                    $cliente->fechaNacimiento = $fechaFormateada;
+                }
+
                 $resultadoRegistro = $cliente->registrarUsuario([
                     'nombres' => $cliente->nombres,
                     'apellidos' => $cliente->apellidos,
@@ -102,12 +108,12 @@ class LoginController
                     'departamento' => $cliente->departamento,
                     'municipio' => $cliente->municipio,
                     'telefono' => $cliente->telefono,
-                    'fechaNacimiento' => $cliente->fechaNacimiento,
+                    'fechaNacimiento' => $cliente->fechaNacimiento, 
                     'sexo' => $cliente->sexo,
                     'correo' => $cliente->correo,
                     'contraseña' => $cliente->contraseña,
                 ]);
-    var_dump( $resultadoRegistro );
+                
                 if (is_array($resultadoRegistro)) {
                     $errores = '¡Error de Registro!';
                 } else {
@@ -115,7 +121,7 @@ class LoginController
                 }
             }
         }
-    
+
         $router->render('auth/registroUsuario', [
             'errores' => $errores,
             'departamentos' => $departamentos,
@@ -123,9 +129,4 @@ class LoginController
             'mensajeExito' => $mensajeExito,
         ]);
     }
-    
-    
-    
-    
-    
 }

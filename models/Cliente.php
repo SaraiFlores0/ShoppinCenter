@@ -89,13 +89,13 @@ class Cliente extends ActiveRecord
             '$this->apellidos',
             '$this->dui',
             '$this->direccion',
+            '$this->departamento',
             '$this->municipio',
             '$this->telefono',
             '$this->fechaNacimiento',
             '$this->sexo',
             '$this->correo',
-            '$this->contraseña',
-            @respuesta);";
+            '$this->contraseña');";
             $resultado = self::$db->query($query);
     
             $resultado = self::$db->query("SELECT @respuesta AS respuesta");
