@@ -78,7 +78,7 @@ class LoginController
         $errores = [];
         $cliente = new Cliente();
         $departamentos = $cliente->obtenerDepartamentos();
-        $municipios = $cliente->obtenerMunicipiosPorDepartamento(1);
+        $municipios = $cliente->obtenerMunicipiosPorDepartamento(6);
         $mensajeExito = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
